@@ -9,13 +9,13 @@ export function Home() {
         navigate("/login");
     }
 
-    if (localStorage.getItem("isSignedIn") === "true") {
-        return (
-            <>
-                <h1>Hello</h1>
-            </>
-        )
-    } else
+    // if (localStorage.getItem("isSignedIn") === "true") {
+    //     return (
+    //         <>
+    //             <h1>Hello</h1>
+    //         </>
+    //     )
+    // } else
     return (
         <div className="bg-[url('/world-cup-cover.jpg')] bg-cover bg-center h-screen">
             <div className="flex flex-col items-center justify-center h-screen">

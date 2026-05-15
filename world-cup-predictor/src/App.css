@@ -1,2 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+
+@font-face {
+    font-family: 'Doric Regular';
+    src: url('./assets/fonts/Doric Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+    font-size: 1.75rem;
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 550;
+    font-size: 1.2rem;
+}
+
+h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+    font-size: 1.15rem;
+}
+
+h4 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+    font-size: 1.15rem;
+    color: dimgray;
+}

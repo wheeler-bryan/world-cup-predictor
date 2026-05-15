@@ -1,34 +1,25 @@
 import "../App.css"
-import { useState } from "react";
+import { type Dispatch, type SetStateAction } from 'react';
 import { Sortable } from "./Sortable.tsx";
 import { DndContext } from "@dnd-kit/core";
-import { arrayMove } from "@dnd-kit/sortable";
+import {arrayMove, SortableContext} from "@dnd-kit/sortable";
+import { Country } from '../assets/countries.ts'
+import { MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 
-class Country {
-    name: string;
-    active: boolean;
-
-    constructor(name: string) {
-        this.name = name;
-        this.active = false;
-    }
-}
-
-export function QuadDrag( { inputCountries, abbreviations } : {
-    inputCountries: string[],
-    abbreviations: string[],
+export function QuadDrag( { id, countries, setCountries, filteredCountries, setFilteredCountries } : {
+    id: string,
+    countries: Country[],
+    setCountries: Dispatch<SetStateAction<Country[]>>,
+    filteredCountries: Country[],
+    setFilteredCountries: Dispatch<SetStateAction<Country[]>>,
 }) {
 
-    const [countries, setCountries] = useState<Country[]>([
-        new Country(inputCountries[0]),
-        new Country(inputCountries[1]),
-        new Country(inputCountries[2]),
-        new Country(inputCountries[3]),
-    ]);
+    // for mobile applications
+    const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
-    const [filteredCountries, setFilteredCountries] = useState<Country[]>([
-    ]);
-
+    // clicking a country's button
+    // sets that index of a country to active and appends to filtered countries
+    // only way to get a country INTO filtered countries
     const handleClick = (index: number) => {
         setCountries(prev => prev.map((country, i) =>
             i === index ? { ...country, active: true } : country
@@ -37,8 +28,16 @@ export function QuadDrag( { inputCountries, abbreviations } : {
         setFilteredCountries(prev => [...prev, countries[index]]);
     };
 
+    // handles changing the indices of the countries once they are dragged
     const handleDragEnd = (event) => {
         const { active, over } = event;
+
+        console.log("Motion Detected: Group:", id);
+        console.log("Country:", active.id);
+        console.log("over?:", over?.id);
+        console.log("filteredCountries:", filteredCountries.map(c => c.name));
+        console.log("oldIndex:", filteredCountries.findIndex(c => c.name === active.id));
+        console.log("newIndex:", filteredCountries.findIndex(c => c.name === over?.id));
 
         if (active.id !== over?.id) {
             setFilteredCountries(prev => {
@@ -50,17 +49,24 @@ export function QuadDrag( { inputCountries, abbreviations } : {
     };
 
     return(
-        <div>
-            <DndContext onDragEnd={handleDragEnd}>
-                {!countries[0].active ? <button id="countryOne" className="m-[0.5rem] p-[0.25rem] rounded-xl border-black border-2" onClick={() => handleClick(0)}>{abbreviations[0]}</button> : null}
-                {!countries[1].active ? <button id="countryTwo" className="m-[0.5rem] p-[0.25rem] rounded-xl border-black border-2" onClick={() => handleClick(1)}>{abbreviations[1]}</button> : null}
-                {!countries[2].active ? <button id="countryThree" className="m-[0.5rem] p-[0.25rem] rounded-xl border-black border-2" onClick={() => handleClick(2)}>{abbreviations[2]}</button> : null}
-                {!countries[3].active ? <button id="countryFour" className="m-[0.5rem] p-[0.25rem] rounded-xl border-black border-2" onClick={() => handleClick(3)}>{abbreviations[3]}</button> : null}
-                <ul className="list">
-                    {filteredCountries.map((country, index) =>
-                        <Sortable key={country.name} id={country.name} index={index} />
-                    )}
-                </ul>
+        <div className="m-[0.2rem] bg-gray-300 rounded-3xl w-[18rem]">
+            <h2>{"Group " + id}</h2>
+            <DndContext id={"DNDContextGroup" + id} sensors={sensors} onDragEnd={handleDragEnd}> {/* MAKE THIS A MAP FUNCTION*/}
+                {countries.map((country, i) =>
+                    (!country.active ?
+                    <button key={country.name + " Button"} id={country.name + " Button"} className="m-[0.5rem] p-[0.25rem] rounded-xl border-black border-2" onClick={() => handleClick(i)}>
+                        <img src={country.flag} alt={country.abbreviation} height="50rem" width="38rem" />
+                        <h3>{country.abbreviation}</h3>
+                    </button>
+                    : null)
+                )}
+                <SortableContext id={"SortableGroup" + id} items={filteredCountries.map(c => c.name)}>
+                    <ul className="list">
+                        {filteredCountries.map((country, index) =>
+                                <Sortable key={country.name} id={country.name} image={country.flag} index={index} />
+                        )}
+                    </ul>
+                </SortableContext>
             </DndContext>
         </div>
     );
