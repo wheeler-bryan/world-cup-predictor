@@ -2,7 +2,8 @@ import "../App.css"
 import { type Dispatch, type SetStateAction } from 'react';
 import { Sortable } from "./Sortable.tsx";
 import { DndContext } from "@dnd-kit/core";
-import {arrayMove, SortableContext} from "@dnd-kit/sortable";
+import type { DragEndEvent } from "@dnd-kit/core";
+import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { Country } from '../assets/countries.ts'
 import { MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 
@@ -29,7 +30,7 @@ export function QuadDrag( { id, countries, setCountries, filteredCountries, setF
     };
 
     // handles changing the indices of the countries once they are dragged
-    const handleDragEnd = (event) => {
+    const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
 
         console.log("Motion Detected: Group:", id);
@@ -50,16 +51,18 @@ export function QuadDrag( { id, countries, setCountries, filteredCountries, setF
 
     return(
         <div className="m-[0.2rem] bg-gray-300 rounded-3xl w-[18rem]">
-            <h2>{"Group " + id}</h2>
+            <h2 className="ml-[0.75rem] pt-[0.25rem] pb-[0.25rem]">{"Group " + id}</h2>
             <DndContext id={"DNDContextGroup" + id} sensors={sensors} onDragEnd={handleDragEnd}> {/* MAKE THIS A MAP FUNCTION*/}
-                {countries.map((country, i) =>
-                    (!country.active ?
-                    <button key={country.name + " Button"} id={country.name + " Button"} className="m-[0.5rem] p-[0.25rem] rounded-xl border-black border-2" onClick={() => handleClick(i)}>
-                        <img src={country.flag} alt={country.abbreviation} height="50rem" width="38rem" />
-                        <h3>{country.abbreviation}</h3>
-                    </button>
-                    : null)
-                )}
+                <div className="flex justify-center">
+                    {countries.map((country, i) =>
+                        (!country.active ?
+                        <button key={country.name + " Button"} id={country.name + " Button"} className="m-[0.5rem] p-[0.25rem] rounded-xl border-black border-2" onClick={() => handleClick(i)}>
+                            <img src={country.flag} alt={country.abbreviation} height="50rem" width="38rem" />
+                            <h3>{country.abbreviation}</h3>
+                        </button>
+                        : null)
+                    )}
+                </div>
                 <SortableContext id={"SortableGroup" + id} items={filteredCountries.map(c => c.name)}>
                     <ul className="list">
                         {filteredCountries.map((country, index) =>

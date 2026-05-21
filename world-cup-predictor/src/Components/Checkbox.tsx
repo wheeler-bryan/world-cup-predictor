@@ -1,20 +1,23 @@
+import type {Country} from "../assets/countries.ts";
+import "../App.css"
 
-export function Checkbox({ children, value, setState }: {
-    children: string;
-    value: boolean;
-    setState: (newState: boolean) => void;
+export function Checkbox({ country, value, onToggle, index }: {
+    country: Country,
+    value: boolean,
+    onToggle: (index: number) => void,
+    index: number,
 })  {
-    return (
-        <>
-            <div className="flex flex-col gap-[10px] font-[Poppins] text-[14px] font-light pt-[7px] hover:border-[#a2cafe] ">
-                <label htmlFor="cb">{children}</label>
-                <input id="cb"
-                       className="border-[#ececec]"
-                       type="checkbox"
-                       checked={value} onChange={(e)=>setState(e.target.checked)}
-                />
-            </div>
 
-        </>
+    const color: string = (value) ? "bg-green-200" : "bg-[#ececec]";
+    const box: string = (value) ? "../src/assets/icons/checked.png" : "../src/assets/icons/unchecked.png";
+
+    return (
+        <button onClick={() => onToggle(index)}>
+            <div className={`flex justify-center items-center ${color} m-[0.75rem] rounded-xl h-[5rem]`}>
+                <img className="ml-[1rem] mr-auto" src={country.flag} alt={country.name + "flag"} height="100rem" width="75rem" />
+                <h3 className="text-center">{country.name}</h3>
+                <img className="ml-auto mr-[1rem]" src={box} alt={country.name + "checkbox"} height="30rem" width="23rem"/>
+            </div>
+        </button>
     )
 }

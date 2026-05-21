@@ -22,14 +22,16 @@ export function Sortable({id, index, image} : {
     };
 
     const color: string = (index < 2) ? "bg-green-200 border-[0.01rem]" :
-        (index === 2) ? "bg-yellow-200 border-[0.01rem]" : "";
+        (index === 2) ? "bg-yellow-200 border-[0.01rem]" : "text-gray-400 mb-[0.15rem]";
+
+    const padding: string = (index < 1) ? "pr-[1.75rem]" : "pr-[1.5rem]"
 
     return (
         <li ref={setNodeRef} {...listeners} {...attributes} style={style} key={"li " + id}
-            className={`font-[Poppins] text-[1.33rem] item p-[5px] w-[18rem] ${color}`}>
-
+            className={`flex font-[Poppins] text-[1.33rem] item p-[5px] w-[18rem]  ${color}`}>
+            <h3 className={`justify-self-start text-black ${padding}`}>{index+1}</h3>
             <img src={image} alt={id} height="50rem" width="38rem" />
-            <h3>{id}</h3>
+            <h3 className="pl-[1rem] text-center">{id}</h3>
         </li>
     );
 }
