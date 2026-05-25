@@ -7,7 +7,8 @@ import { MatchupDisplay } from "../Components/MatchupDisplay.tsx";
 import {Group, winner, runner_up, MatchupData, third_place, roundOf16Seeding, QFSeeding} from "../assets/seeding.ts";
 import thirdPlaceTable from "../assets/third_place_table.json"
 
-
+// end drag can also check
+// those are the only two that change matchup data => filtered countries, selected third
 
 export function MakePicks() {
 
@@ -73,52 +74,76 @@ export function MakePicks() {
 
     const roundOf32Matchups: MatchupData[] = useMemo(
         () => [
-        new MatchupData(roundOf32Countries[runner_up][Group.A], roundOf32Countries[runner_up][Group.B], "Group A Runner-Up", "Group B Runner-Up", 73, "Sunday, June 28th"),
-        new MatchupData(roundOf32Countries[winner][Group.E], roundOf32Countries[third_place][3], "Group E Winner", "Third Place A/B/C/D/F", 74, "Monday, June 29th"),
-        new MatchupData(roundOf32Countries[winner][Group.F], roundOf32Countries[runner_up][Group.C], "Group F Winner", "Group C Runner-Up", 75, "Monday, June 29th"),
-        new MatchupData(roundOf32Countries[winner][Group.C], roundOf32Countries[runner_up][Group.F], "Group C Winner", "Group F Runner-Up", 76, "Monday, June 29th"),
-        new MatchupData(roundOf32Countries[winner][Group.I], roundOf32Countries[third_place][5], "Group I Winner", "Third Place C/D/F/G/H", 77, "Tuesday, June 30th"),
-        new MatchupData(roundOf32Countries[runner_up][Group.E], roundOf32Countries[runner_up][Group.I], "Group E Runner-Up", "Group I Runner-Up", 78, "Tuesday, June 30th"),
-        new MatchupData(roundOf32Countries[winner][Group.A], roundOf32Countries[third_place][0], "Group A Winner", "Third Place C/E/F/H/I", 79, "Tuesday, June 30th"),
-        new MatchupData(roundOf32Countries[winner][Group.L], roundOf32Countries[third_place][7], "Group L Winner", "Third Place E/H/I/J/K", 80, "Wednesday, July 1st"),
-        new MatchupData(roundOf32Countries[winner][Group.D], roundOf32Countries[third_place][2], "Group D Winner", "Third Place B/E/F/I/J", 81, "Wednesday, July 1st"),
-        new MatchupData(roundOf32Countries[winner][Group.G], roundOf32Countries[third_place][4], "Group G Winner", "Third Place A/E/H/I/J", 82, "Wednesday July 1st"),
-        new MatchupData(roundOf32Countries[runner_up][Group.K], roundOf32Countries[runner_up][Group.L], "Group K Runner-Up", "Group L Runner-Up", 83, "Thursday, July 2nd"),
-        new MatchupData(roundOf32Countries[winner][Group.H], roundOf32Countries[runner_up][Group.J], "Group H Winner", "Group J Runner-Up", 84, "Thursday, July 2nd"),
-        new MatchupData(roundOf32Countries[winner][Group.B], roundOf32Countries[third_place][1], "Group B Winner", "Third Place E/F/G/I/J", 85, "Thursday, July 2nd"),
-        new MatchupData(roundOf32Countries[winner][Group.J], roundOf32Countries[runner_up][Group.H], "Group J Winner", "Group H Runner-Up", 86, "Friday, July 3rd"),
-        new MatchupData(roundOf32Countries[winner][Group.K], roundOf32Countries[third_place][6], "Group K Winner", "Third Place D/E/I/J/L", 87, "Friday, July 3rd"),
-        new MatchupData(roundOf32Countries[runner_up][Group.D], roundOf32Countries[runner_up][Group.G], "Group D Runner-Up", "Group G Runner-Up", 88, "Friday, July 3rd"),
+        new MatchupData(roundOf32Countries[runner_up][Group.A], roundOf32Countries[runner_up][Group.B], "Group A Runner-Up", "Group B Runner-Up", 73, "Sunday, June 28th", [1, 0]),
+        new MatchupData(roundOf32Countries[winner][Group.E], roundOf32Countries[third_place][3], "Group E Winner", "Third Place A/B/C/D/F", 74, "Monday, June 29th", [0, 0]),
+        new MatchupData(roundOf32Countries[winner][Group.F], roundOf32Countries[runner_up][Group.C], "Group F Winner", "Group C Runner-Up", 75, "Monday, June 29th", [1, 1]),
+        new MatchupData(roundOf32Countries[winner][Group.C], roundOf32Countries[runner_up][Group.F], "Group C Winner", "Group F Runner-Up", 76, "Monday, June 29th", [2, 0]),
+        new MatchupData(roundOf32Countries[winner][Group.I], roundOf32Countries[third_place][5], "Group I Winner", "Third Place C/D/F/G/H", 77, "Tuesday, June 30th", [0, 1]),
+        new MatchupData(roundOf32Countries[runner_up][Group.E], roundOf32Countries[runner_up][Group.I], "Group E Runner-Up", "Group I Runner-Up", 78, "Tuesday, June 30th", [2, 1]),
+        new MatchupData(roundOf32Countries[winner][Group.A], roundOf32Countries[third_place][0], "Group A Winner", "Third Place C/E/F/H/I", 79, "Tuesday, June 30th", [3, 0]),
+        new MatchupData(roundOf32Countries[winner][Group.L], roundOf32Countries[third_place][7], "Group L Winner", "Third Place E/H/I/J/K", 80, "Wednesday, July 1st", [3, 1]),
+        new MatchupData(roundOf32Countries[winner][Group.D], roundOf32Countries[third_place][2], "Group D Winner", "Third Place B/E/F/I/J", 81, "Wednesday, July 1st", [5, 0]),
+        new MatchupData(roundOf32Countries[winner][Group.G], roundOf32Countries[third_place][4], "Group G Winner", "Third Place A/E/H/I/J", 82, "Wednesday July 1st", [5, 1]),
+        new MatchupData(roundOf32Countries[runner_up][Group.K], roundOf32Countries[runner_up][Group.L], "Group K Runner-Up", "Group L Runner-Up", 83, "Thursday, July 2nd", [4, 0]),
+        new MatchupData(roundOf32Countries[winner][Group.H], roundOf32Countries[runner_up][Group.J], "Group H Winner", "Group J Runner-Up", 84, "Thursday, July 2nd", [4, 1]),
+        new MatchupData(roundOf32Countries[winner][Group.B], roundOf32Countries[third_place][1], "Group B Winner", "Third Place E/F/G/I/J", 85, "Thursday, July 2nd", [7, 0]),
+        new MatchupData(roundOf32Countries[winner][Group.J], roundOf32Countries[runner_up][Group.H], "Group J Winner", "Group H Runner-Up", 86, "Friday, July 3rd", [6, 0]),
+        new MatchupData(roundOf32Countries[winner][Group.K], roundOf32Countries[third_place][6], "Group K Winner", "Third Place D/E/I/J/L", 87, "Friday, July 3rd", [7, 1]),
+        new MatchupData(roundOf32Countries[runner_up][Group.D], roundOf32Countries[runner_up][Group.G], "Group D Runner-Up", "Group G Runner-Up", 88, "Friday, July 3rd", [6, 1]),
         ],
         [roundOf32Countries]
     );
 
     const [roundOf16Matchups, setRoundOf16Matchups] = useState<MatchupData[]>([
-        new MatchupData(null, null, "Winner Match 74", "Winner Match 77", 89, "Saturday, July 4th"),
-        new MatchupData(null, null, "Winner Match 73", "Winner Match 75", 90, "Saturday, July 4th"),
-        new MatchupData(null, null, "Winner Match 76", "Winner Match 78", 91, "Sunday, July 5th"),
-        new MatchupData(null, null, "Winner Match 79", "Winner Match 80", 92, "Sunday, July 5th"),
-        new MatchupData(null, null, "Winner Match 83", "Winner Match 84", 93, "Monday, July 6th"),
-        new MatchupData(null, null, "Winner Match 81", "Winner Match 82", 94, "Monday, July 6th"),
-        new MatchupData(null, null, "Winner Match 86", "Winner Match 88", 95, "Tuesday, July 7th"),
-        new MatchupData(null, null, "Winner Match 85", "Winner Match 87", 96, "Tuesday, July 7th"),
+        new MatchupData(null, null, "Winner Match 74", "Winner Match 77", 89, "Saturday, July 4th", [0, 0]),
+        new MatchupData(null, null, "Winner Match 73", "Winner Match 75", 90, "Saturday, July 4th", [0, 1]),
+        new MatchupData(null, null, "Winner Match 76", "Winner Match 78", 91, "Sunday, July 5th", [2, 0]),
+        new MatchupData(null, null, "Winner Match 79", "Winner Match 80", 92, "Sunday, July 5th", [2, 1]),
+        new MatchupData(null, null, "Winner Match 83", "Winner Match 84", 93, "Monday, July 6th", [1, 0]),
+        new MatchupData(null, null, "Winner Match 81", "Winner Match 82", 94, "Monday, July 6th", [1,1]),
+        new MatchupData(null, null, "Winner Match 86", "Winner Match 88", 95, "Tuesday, July 7th", [3, 0]),
+        new MatchupData(null, null, "Winner Match 85", "Winner Match 87", 96, "Tuesday, July 7th", [3,1]),
     ]);
 
     const [QFMatchups, setQFMatchups] = useState<MatchupData[]>([
-        new MatchupData(null, null, "Winner Match 89", "Winner Match 90", 97, "Thursday, July 9th"),
-        new MatchupData(null, null, "Winner Match 93", "Winner Match 94", 98, "Friday, July 10th"),
-        new MatchupData(null, null, "Winner Match 91", "Winner Match 92", 99, "Saturday, July 11th"),
-        new MatchupData(null, null, "Winner Match 95", "Winner Match 96", 100, "Saturday, July 11th"),
+        new MatchupData(null, null, "Winner Match 89", "Winner Match 90", 97, "Thursday, July 9th", [0, 0]),
+        new MatchupData(null, null, "Winner Match 93", "Winner Match 94", 98, "Friday, July 10th", [0,1]),
+        new MatchupData(null, null, "Winner Match 91", "Winner Match 92", 99, "Saturday, July 11th", [1, 0]),
+        new MatchupData(null, null, "Winner Match 95", "Winner Match 96", 100, "Saturday, July 11th", [1,1]),
     ]);
 
     const [SFMatchups, setSFMatchups] = useState<MatchupData[]>([
-        new MatchupData(null, null, "Winner Quarter-final 1", "Winner Quarter-final 2", 101, "Tuesday, July 14th"),
-        new MatchupData(null, null, "Winner Quarter-final 3", "Winner Quarter-final 4", 102, "Wednesday, July 15th"),
+        new MatchupData(null, null, "Winner Quarter-final 1", "Winner Quarter-final 2", 101, "Tuesday, July 14th", [0, 0]),
+        new MatchupData(null, null, "Winner Quarter-final 3", "Winner Quarter-final 4", 102, "Wednesday, July 15th", [0, 1]),
     ]);
 
     const [finalMatchup, setFinalMatchup] = useState<MatchupData>(
-        new MatchupData(null, null, "Winner Semi-final 1", "Winner Semi-final 2", 104, "Sunday, July 19th")
+        new MatchupData(null, null, "Winner Semi-final 1", "Winner Semi-final 2", 104, "Sunday, July 19th", [0, 0])
     );
+
+    const checkKO = (c: string, thirdWipe: boolean = false) => {
+        console.log("KO PURGING  " + c + "\nDisplay:\n")
+
+
+        setRoundOf16Matchups(prev =>
+            prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
+                ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
+            )
+        );
+
+        if (thirdWipe && selectedThirdPlaceCountries.filter((country) => country?.name === c).length === 1) {
+            for (let i = 0; i < 12; i++) {
+                const thirdWipeCountry = selectedThirdPlaceCountries[i]?.name;
+
+                if (thirdWipeCountry && c !== thirdWipeCountry)
+                setRoundOf16Matchups(prev =>
+                    prev.map((m: MatchupData) => ((thirdWipeCountry === m.home?.name || thirdWipeCountry === m.away?.name) ?
+                        ((thirdWipeCountry === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
+                    )
+                );
+            }
+        }
+    }
 
     return(
         <>
@@ -142,7 +167,8 @@ export function MakePicks() {
                                     prev.map((r, i) => i === index ? (typeof newRow === 'function' ? newRow(r) : newRow) : r)
                                 )
                             }
-                            checkState={checkSelectedThird}
+                            checkThird={checkSelectedThird}
+                            checkKO={checkKO}
                         />
                     )}
                 </div>
@@ -151,13 +177,14 @@ export function MakePicks() {
                 <ThirdPlace countries={thirdPlaceCountries}
                             setSelectedCountries={setSelectedThirdPlaceCountries}
                             selectedCountries={selectedThirdPlaceCountries}
+                            checkKO={checkKO}
                 />
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">ROUND OF 32</h1>
                 <h4 className="mb-[1.5rem] pl-[0.5rem]"> Select your winners for all 16 matches</h4>
-                <MatchupDisplay matchups={roundOf32Matchups} setMatchups={setRoundOf16Matchups} seedingFunc={roundOf16Seeding}/>
+                <MatchupDisplay matchups={roundOf32Matchups} setMatchups={setRoundOf16Matchups} seedingFunc={roundOf16Seeding} nextMatchups={roundOf16Matchups} />
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">ROUND OF 16</h1>
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your winners for all eight matches</h4>
-                <MatchupDisplay matchups={roundOf16Matchups} setMatchups={setQFMatchups} seedingFunc={QFSeeding}/>
+                <MatchupDisplay matchups={roundOf16Matchups} setMatchups={setQFMatchups} seedingFunc={QFSeeding} nextMatchups={QFMatchups} />
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">QUARTER-FINALS</h1>
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your winners for the quarter-finals</h4>
             </div>

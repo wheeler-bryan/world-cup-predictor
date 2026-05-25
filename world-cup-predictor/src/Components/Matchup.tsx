@@ -2,19 +2,16 @@ import "../App.css"
 import type {MatchupData} from "../assets/seeding.ts";
 import type {Country} from "../assets/countries.ts";
 import { FlagButton } from "./FlagButton.tsx";
-import { useState } from "react";
 // " • "
 
-export function Matchup({ matchup, onToggle } : {
+export function Matchup({ matchup, onToggle, winner } : {
     matchup: MatchupData,
     onToggle: (country: Country, match_number: number) => void,
+    winner: Country | null
 }) {
-
-    const [winner, setWinner] = useState<Country>();
 
     const onClick = (country: Country, match_number: number) => {
         onToggle(country, match_number);
-        setWinner(country);
     }
     return(
         <div className="bg-gray-300 rounded-3xl w-[22rem] h-[8rem] max-w-[30rem]">

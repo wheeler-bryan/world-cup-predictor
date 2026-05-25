@@ -3,10 +3,11 @@ import { MatchupData } from "../assets/seeding.ts";
 import { Matchup } from "./Matchup.tsx";
 import type { Dispatch, SetStateAction } from "react";
 
-export function MatchupDisplay({ matchups, setMatchups, seedingFunc } : {
-    matchups: MatchupData[], // [place][group]
+export function MatchupDisplay({ matchups, setMatchups, seedingFunc, nextMatchups } : {
+    matchups: MatchupData[],
     setMatchups: Dispatch<SetStateAction<(MatchupData)[]>>,
     seedingFunc: (match_number: number) => (number | boolean)[],
+    nextMatchups: MatchupData[],
 } ) {
 
     const onClick = (country: Country, match_number: number) => {
@@ -25,7 +26,10 @@ export function MatchupDisplay({ matchups, setMatchups, seedingFunc } : {
     return(
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center justify-items-center ml-[3rem] mr-[3rem]">
             {matchups.map((matchup) => (
-                <Matchup matchup={matchup} onToggle={onClick} key={"RO32MatchupNo" + matchup.match_number} />
+                <Matchup matchup={matchup}
+                         onToggle={onClick}
+                         key={"RO32MatchupNo" + matchup.match_number}
+                         winner={(matchup.winner_location[1] === 0) ? nextMatchups[matchup.winner_location[0]].home : nextMatchups[matchup.winner_location[0]].away}/>
             ))}
         </div>
     )

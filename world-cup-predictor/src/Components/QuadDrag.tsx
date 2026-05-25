@@ -7,13 +7,14 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { Country } from '../assets/countries.ts'
 import { MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 
-export function QuadDrag( { id, countries, setCountries, filteredCountries, setFilteredCountries, checkState } : {
+export function QuadDrag( { id, countries, setCountries, filteredCountries, setFilteredCountries, checkThird, checkKO } : {
     id: string,
     countries: Country[],
     setCountries: Dispatch<SetStateAction<Country[]>>,
     filteredCountries: Country[],
     setFilteredCountries: Dispatch<SetStateAction<Country[]>>,
-    checkState: (group: string) => void,
+    checkThird: (group: string) => void,
+    checkKO: (country_name: string, thirdWipe?: boolean) => void,
 }) {
 
     // for mobile applications
@@ -32,7 +33,7 @@ export function QuadDrag( { id, countries, setCountries, filteredCountries, setF
 
     // handles changing the indices of the countries once they are dragged
     const handleDragEnd = (event: DragEndEvent) => {
-        const { active, over } = event;
+        const {active, over} = event;
 
         const old_index: number = filteredCountries.findIndex(c => c.name === active.id);
         const new_index: number = filteredCountries.findIndex(c => c.name === over?.id);
@@ -52,8 +53,44 @@ export function QuadDrag( { id, countries, setCountries, filteredCountries, setF
             });
         }
 
-        if((old_index >= 2 || new_index >= 2) && old_index !== new_index) {
-            checkState(id); // if we have moved a country that would affect selectedThird
+        // check the third place country bug on drag
+        if ((old_index >= 2 || new_index >= 2) && old_index !== new_index) {
+            checkThird(id); // if we have moved a country that would affect selectedThird
+        }
+
+        const first_index: number = (old_index < new_index) ? old_index : new_index;
+        const last_index: number = (old_index < new_index) ? new_index : old_index;
+        let num_purge: number = 0;
+        let offset: number = 0;
+        let third_wipe: boolean = false;
+
+        if (old_index !== new_index) {
+            if (first_index === 0 && last_index >= 2) { // 1 is replacing / being replaced by 3 or 4, causing a top 3 shift
+                num_purge = 3;
+                third_wipe = true;
+                console.log("full shift")
+            } else if (first_index === 0 && last_index == 1) { // 1 is replacing / being replaced by 2, causing only the top two to shift
+                num_purge = 2;
+                console.log("top shift")
+            } else if (first_index === 1 && last_index >= 2) { // 2 is replacing / being replaced by 3 or 4, causing the bottom two to shift
+                num_purge = 2;
+                offset = 1;
+                third_wipe = true;
+                console.log("bottom shift");
+            } else if (first_index === 2) { // 3 is replacing / being replaced by 4, causing the last value to shift
+                num_purge = 1;
+                offset = 2;
+                third_wipe = true;
+                console.log("last shift")
+            }
+
+            for (offset; offset < num_purge; offset++) {
+                if (offset !== 2) {
+                    checkKO(filteredCountries[offset].name)
+                } else {
+                    checkKO(filteredCountries[offset].name, third_wipe)
+                }
+            }
         }
     };
 

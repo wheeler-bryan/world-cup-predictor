@@ -25,14 +25,16 @@ export class MatchupData {
     away_placeholder: string;
     match_number: number;
     date: string;
+    winner_location: number[]; // [matchup index][home: 0, away: 1]
 
-    constructor(home: Country | null, away: Country | null, home_placeholder: string, away_placeholder: string, match_number: number, date: string) {
+    constructor(home: Country | null, away: Country | null, home_placeholder: string, away_placeholder: string, match_number: number, date: string, winner_location: number[]) {
         this.home = home;
         this.away = away;
         this.home_placeholder = home_placeholder;
         this.away_placeholder = away_placeholder;
         this.match_number = match_number;
         this.date = date;
+        this.winner_location = winner_location;
     }
 }
 
