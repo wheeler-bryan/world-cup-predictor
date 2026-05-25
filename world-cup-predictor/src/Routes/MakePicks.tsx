@@ -4,7 +4,17 @@ import { letters, groups, abbreviations, flags, Country } from "../assets/countr
 import { useMemo, useState} from "react";
 import { ThirdPlace } from "../Components/ThirdPlace.tsx";
 import { MatchupDisplay } from "../Components/MatchupDisplay.tsx";
-import {Group, winner, runner_up, MatchupData, third_place, roundOf16Seeding, QFSeeding} from "../assets/seeding.ts";
+import {
+    Group,
+    winner,
+    runner_up,
+    MatchupData,
+    third_place,
+    roundOf16Seeding,
+    QFSeeding,
+    SFSeeding,
+    finalSeeding,
+} from "../assets/seeding.ts";
 import thirdPlaceTable from "../assets/third_place_table.json"
 
 // end drag can also check
@@ -117,15 +127,19 @@ export function MakePicks() {
         new MatchupData(null, null, "Winner Quarter-final 3", "Winner Quarter-final 4", 102, "Wednesday, July 15th", [0, 1]),
     ]);
 
-    const [finalMatchup, setFinalMatchup] = useState<MatchupData>(
+    const [finalMatchup, setFinalMatchup] = useState<MatchupData[]>([
         new MatchupData(null, null, "Winner Semi-final 1", "Winner Semi-final 2", 104, "Sunday, July 19th", [0, 0])
-    );
+    ]);
 
     const checkKO = (c: string, thirdWipe: boolean = false) => {
-        console.log("KO PURGING  " + c + "\nDisplay:\n")
-
+        console.log("KO PURGING  " + c);
 
         setRoundOf16Matchups(prev =>
+            prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
+                ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
+            )
+        );
+        setQFMatchups(prev =>
             prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
                 ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
             )
@@ -135,12 +149,18 @@ export function MakePicks() {
             for (let i = 0; i < 12; i++) {
                 const thirdWipeCountry = selectedThirdPlaceCountries[i]?.name;
 
-                if (thirdWipeCountry && c !== thirdWipeCountry)
-                setRoundOf16Matchups(prev =>
-                    prev.map((m: MatchupData) => ((thirdWipeCountry === m.home?.name || thirdWipeCountry === m.away?.name) ?
-                        ((thirdWipeCountry === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
-                    )
-                );
+                if (thirdWipeCountry && c !== thirdWipeCountry) {
+                    setRoundOf16Matchups(prev =>
+                        prev.map((m: MatchupData) => ((thirdWipeCountry === m.home?.name || thirdWipeCountry === m.away?.name) ?
+                            ((thirdWipeCountry === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
+                        )
+                    );
+                    setQFMatchups(prev =>
+                        prev.map((m: MatchupData) => ((thirdWipeCountry === m.home?.name || thirdWipeCountry === m.away?.name) ?
+                            ((thirdWipeCountry === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
+                        )
+                    );
+                }
             }
         }
     }
@@ -181,12 +201,16 @@ export function MakePicks() {
                 />
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">ROUND OF 32</h1>
                 <h4 className="mb-[1.5rem] pl-[0.5rem]"> Select your winners for all 16 matches</h4>
-                <MatchupDisplay matchups={roundOf32Matchups} setMatchups={setRoundOf16Matchups} seedingFunc={roundOf16Seeding} nextMatchups={roundOf16Matchups} />
+                <MatchupDisplay matchups={roundOf32Matchups} setMatchups={setRoundOf16Matchups} seedingFunc={roundOf16Seeding} nextMatchups={roundOf16Matchups} type={"RO"} />
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">ROUND OF 16</h1>
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your winners for all eight matches</h4>
-                <MatchupDisplay matchups={roundOf16Matchups} setMatchups={setQFMatchups} seedingFunc={QFSeeding} nextMatchups={QFMatchups} />
+                <MatchupDisplay matchups={roundOf16Matchups} setMatchups={setQFMatchups} seedingFunc={QFSeeding} nextMatchups={QFMatchups} type={"RO"}/>
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">QUARTER-FINALS</h1>
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your winners for the quarter-finals</h4>
+                <MatchupDisplay matchups={QFMatchups} setMatchups={setSFMatchups} seedingFunc={SFSeeding} nextMatchups={SFMatchups} type={"QF"}/>
+                <h1 className="mt-[1.5rem] pl-[0.5rem]">SEMI-FINALS</h1>
+                <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your winners for the semi-finals</h4>
+                <MatchupDisplay matchups={SFMatchups} setMatchups={setFinalMatchup} seedingFunc={finalSeeding} nextMatchups={finalMatchup} type={"SF"}/>
             </div>
         </>
     );

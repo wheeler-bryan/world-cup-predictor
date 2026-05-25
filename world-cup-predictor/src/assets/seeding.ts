@@ -142,38 +142,13 @@ export function QFSeeding(match_number: number) {
 }
 
 export function SFSeeding(match_number: number) {
-    let index: number = -1;
-    let home: boolean = true;
+    const index = Math.floor((match_number - 97) / 2); // [0 1] = 0 [2 3] = 1
+    const home: boolean = (!((match_number - 97) % 2));
+    return [index, home];
+}
 
-    switch (match_number) {
-        case 89:
-            index = 0;
-            break;
-        case 90:
-            index = 0;
-            home = false;
-            break;
-        case 91:
-            index = 2;
-            break;
-        case 92:
-            index = 2;
-            home = false;
-            break;
-        case 93:
-            index = 1;
-            break;
-        case 94:
-            index = 1;
-            home = false;
-            break;
-        case 95:
-            index = 3;
-            break;
-        case 96:
-            index = 3;
-            home = false;
-            break;
-    }
+export function finalSeeding(match_number: number) {
+    const index = Math.floor((match_number - 101) / 2); // [0 1] = 0 [2 3] = 1
+    const home: boolean = (!((match_number - 101) % 2));
     return [index, home];
 }
