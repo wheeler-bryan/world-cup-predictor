@@ -1,41 +1,43 @@
 import '../App.css'
 import { Country } from '../assets/countries.ts'
-import {type Dispatch, type SetStateAction, useState} from "react";
+import {type Dispatch, type SetStateAction } from "react";
 import {Checkbox} from "./Checkbox.tsx";
 
-export function ThirdPlace( { countries, setSelectedCountries, numSelected } : {
+export function ThirdPlace( { countries, selectedCountries, setSelectedCountries } : {
     countries: Country[],
-    setSelectedCountries: Dispatch<SetStateAction<Country[]>>,
-    numSelected: number
+    selectedCountries: (Country | null)[],
+    setSelectedCountries: Dispatch<SetStateAction<(Country | null)[]>>,
 }) {
 
-    const [values, setValues] = useState<boolean[]>(
-        countries.map(() => false)
-    );
+    const numSelected: number = selectedCountries.filter(c => c !== null).length;
 
     const onClick = (index: number) => {
 
-        if (numSelected < 8 || values[index]) {
-            setValues(prev => prev.map((value, i) =>
-                i === index ? !value : value
-            ));
+        if (numSelected < 8 || selectedCountries[index]) {
 
-            if (!values[index]) {    // recently pressed
-                setSelectedCountries(prev => [...prev, countries[index]])
-            } else { // recently depressed
-                setSelectedCountries(prev => prev.filter(c => c.name !== countries[index].name));
-            }
+            setSelectedCountries(
+                prev => prev.map((country, i) => index === i ?
+                    (!(selectedCountries[index]) ? countries[index] : null)
+                    : country)
+            );
         }
 
         console.log(numSelected + " Selected");
         console.log("Index: " + index)
-        console.log(values)
+        console.log("[" + countries[0]?.name + ", " + countries[1]?.name + ", " + countries[2]?.name + ", " + countries[3]?.name + ", " + countries[4]?.name + ", " + countries[5]?.name + ", " + countries[6]?.name + ", " + countries[7]?.name + ", " + countries[8]?.name + ", " + countries[9]?.name + ", " + countries[10]?.name + ", " + countries[11]?.name + "]")
+        console.log("[" + selectedCountries[0]?.name + ", " + selectedCountries[1]?.name + ", " + selectedCountries[2]?.name + ", " + selectedCountries[3]?.name + ", " + selectedCountries[4]?.name + ", " + selectedCountries[5]?.name + ", " + selectedCountries[6]?.name + ", " + selectedCountries[7]?.name + ", " + selectedCountries[8]?.name + ", " + selectedCountries[9]?.name + ", " + selectedCountries[10]?.name + ", " + selectedCountries[11]?.name + "]")
     }
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 ml-[3rem] mr-[3rem] bg-gray-300 rounded-3xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 ml-[3rem] mr-[3rem] bg-gray-300 rounded-3xl">
             {countries.map((country, index) => (
-                (country) ? <Checkbox country={country} value={values[index]} onToggle={onClick} index={index} key={"ThirdPlaceCheckbox"+country.name}></Checkbox> : null
+                (country) ?
+                    <Checkbox country={country}
+                              value={!!(selectedCountries[index] && selectedCountries[index].name === country.name)}
+                              onToggle={onClick}
+                              index={index}
+                              key={"ThirdPlaceCheckbox"+country.name} />
+                    : null
             ))}
         </div>
     );

@@ -21,8 +21,8 @@ export function Sortable({id, index, image} : {
         transition,
     };
 
-    const color: string = (index < 2) ? "bg-green-200 border-[0.01rem]" :
-        (index === 2) ? "bg-yellow-200 border-[0.01rem]" : "text-gray-400 mb-[0.15rem]";
+    const color: string = (index < 2) ? "bg-green-200 border-[0.01rem] hover:bg-green-300" :
+        (index === 2) ? "bg-yellow-200 border-[0.01rem] hover:bg-yellow-300" : "text-gray-500 mb-[0.15rem] hover:text-black";
 
     const padding: string = (index < 1) ? "pr-[1.75rem]" : "pr-[1.5rem]"
 

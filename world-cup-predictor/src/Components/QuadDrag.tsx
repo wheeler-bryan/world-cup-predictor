@@ -7,12 +7,13 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { Country } from '../assets/countries.ts'
 import { MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 
-export function QuadDrag( { id, countries, setCountries, filteredCountries, setFilteredCountries } : {
+export function QuadDrag( { id, countries, setCountries, filteredCountries, setFilteredCountries, checkState } : {
     id: string,
     countries: Country[],
     setCountries: Dispatch<SetStateAction<Country[]>>,
     filteredCountries: Country[],
     setFilteredCountries: Dispatch<SetStateAction<Country[]>>,
+    checkState: (group: string) => void,
 }) {
 
     // for mobile applications
@@ -33,6 +34,9 @@ export function QuadDrag( { id, countries, setCountries, filteredCountries, setF
     const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
 
+        const old_index: number = filteredCountries.findIndex(c => c.name === active.id);
+        const new_index: number = filteredCountries.findIndex(c => c.name === over?.id);
+
         console.log("Motion Detected: Group:", id);
         console.log("Country:", active.id);
         console.log("over?:", over?.id);
@@ -47,6 +51,10 @@ export function QuadDrag( { id, countries, setCountries, filteredCountries, setF
                 return arrayMove(prev, oldIndex, newIndex);
             });
         }
+
+        if((old_index >= 2 || new_index >= 2) && old_index !== new_index) {
+            checkState(id); // if we have moved a country that would affect selectedThird
+        }
     };
 
     return(
@@ -56,8 +64,8 @@ export function QuadDrag( { id, countries, setCountries, filteredCountries, setF
                 <div className="flex justify-center">
                     {countries.map((country, i) =>
                         (!country.active ?
-                        <button key={country.name + " Button"} id={country.name + " Button"} className="m-[0.5rem] p-[0.25rem] rounded-xl border-black border-2" onClick={() => handleClick(i)}>
-                            <img src={country.flag} alt={country.abbreviation} height="50rem" width="38rem" />
+                        <button key={country.name + " Button"} id={country.name + " Button"} className="m-[0.5rem] p-[0.25rem] rounded-xl bg-[#ececec] hover:bg-[#e0e0e0]" onClick={() => handleClick(i)}>
+                            <img src={country.flag} alt={country.abbreviation} height="55rem" width="41rem" />
                             <h3>{country.abbreviation}</h3>
                         </button>
                         : null)

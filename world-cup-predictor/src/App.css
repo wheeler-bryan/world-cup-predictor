@@ -31,5 +31,12 @@ h4 {
     font-family: 'Poppins', sans-serif;
     font-weight: normal;
     font-size: 1.15rem;
-    color: dimgray;
+    color: #555555;
+}
+
+h5 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+    font-size: 1rem;
+    /*color: #555555;*/
 }

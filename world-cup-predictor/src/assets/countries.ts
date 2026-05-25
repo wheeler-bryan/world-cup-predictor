@@ -3,14 +3,12 @@ export class Country {
     abbreviation: string;
     flag: string;
     active: boolean;
-    thirdSelected: boolean;
 
     constructor(name: string, abbreviation: string, flag: string) {
         this.name = name;
         this.abbreviation = abbreviation;
         this.flag = flag;
         this.active = false;
-        this.thirdSelected = false;
     }
 }
 
