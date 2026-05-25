@@ -13,11 +13,11 @@ export function FlagButton({ onToggle, country, match_number, winner, placeholde
     const color: string = (winner) ? "bg-green-200 hover:bg-green-300 border-2 border-green-600" : "bg-[#ececec] hover:bg-[#e0e0e0]";
 
     const sizing: string = (type === "RO") ? "w-[10rem] h-[5rem]" :
-        (type === "QF") ? "w-[10rem] h-[8rem]" : "w-[10rem] h-[5rem]";
+        (type === "QF" || type === "SF") ? "w-[10rem] h-[8rem]" : "w-[10rem] h-[5rem]";
     const flag_height: string = (type === "RO") ? "80rem" :
-        (type === "QF") ? "100rem" : "80rem";
+        (type === "QF" || type === "SF") ? "100rem" : "80rem";
     const flag_width: string = (type === "RO") ? "60rem" :
-        (type === "QF") ? "75rem" : "60rem";
+        (type === "QF" || type === "SF") ? "75rem" : "60rem";
 
 
     return (
@@ -29,6 +29,8 @@ export function FlagButton({ onToggle, country, match_number, winner, placeholde
                 <h3 className="text-center">{country.name}</h3>
             </div>
         </button> :
-        <h4 className="text-center max-w-[7rem]">{placeholder}</h4>
+        <div>
+            <h4 className="text-center max-w-[7rem]">{placeholder}</h4>
+        </div>
     );
 }

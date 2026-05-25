@@ -24,10 +24,11 @@ export function MatchupDisplay({ matchups, setMatchups, seedingFunc, nextMatchup
         console.log(country.name + " selected")
     }
 
-    const grid_size: string = (type === "RO" || type === "QF") ? "md:grid-cols-4 gap-4" : "md:grid-cols-2 gap-4"
+    const grid_size: string = (type === "RO" || type === "QF") ? "md:grid-cols-4" :
+        (type === "SF") ? "md:grid-cols-2" : ""
 
     return(
-        <div className={`grid grid-cols-1 ${grid_size} items-center justify-items-center ml-[3rem] mr-[3rem]`}>
+        <div className={`grid grid-cols-1 ${grid_size} gap-4 items-center justify-items-center ml-[3rem] mr-[3rem]`}>
             {matchups.map((matchup) => (
                 <Matchup matchup={matchup}
                          onToggle={onClick}
