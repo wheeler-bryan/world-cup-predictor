@@ -47,16 +47,16 @@ export const abbreviations: string[][] = [
 ];
 
 export const flags: string[][] = [
-    ["../src/assets/flags/mx.svg", "../src/assets/flags/kr.svg", "../src/assets/flags/za.svg", "../src/assets/flags/cz.svg"],
-    ["../src/assets/flags/ca.svg", "../src/assets/flags/ch.svg", "../src/assets/flags/qa.svg", "../src/assets/flags/ba.svg"],
-    ["../src/assets/flags/br.svg", "../src/assets/flags/ma.svg", "../src/assets/flags/gb-sct.svg", "../src/assets/flags/ht.svg"],
-    ["../src/assets/flags/us.svg", "../src/assets/flags/py.svg", "../src/assets/flags/au.svg", "../src/assets/flags/tr.svg"],
-    ["../src/assets/flags/de.svg", "../src/assets/flags/ec.svg", "../src/assets/flags/ci.svg", "../src/assets/flags/cw.svg"],
-    ["../src/assets/flags/nl.svg", "../src/assets/flags/jp.svg", "../src/assets/flags/tn.svg", "../src/assets/flags/se.svg"],
-    ["../src/assets/flags/be.svg", "../src/assets/flags/ir.svg", "../src/assets/flags/eg.svg", "../src/assets/flags/nz.svg"],
-    ["../src/assets/flags/es.svg", "../src/assets/flags/uy.svg", "../src/assets/flags/sa.svg", "../src/assets/flags/cv.svg"],
-    ["../src/assets/flags/fr.svg", "../src/assets/flags/sn.svg", "../src/assets/flags/no.svg", "../src/assets/flags/iq.svg"],
-    ["../src/assets/flags/ar.svg", "../src/assets/flags/at.svg", "../src/assets/flags/dz.svg", "../src/assets/flags/jo.svg"],
-    ["../src/assets/flags/pt.svg", "../src/assets/flags/co.svg", "../src/assets/flags/uz.svg", "../src/assets/flags/cd.svg"],
-    ["../src/assets/flags/gb-eng.svg", "../src/assets/flags/cr.svg", "../src/assets/flags/pa.svg", "../src/assets/flags/gh.svg"]
+    ["/flags/mx.svg", "/flags/kr.svg", "/flags/za.svg", "/flags/cz.svg"],
+    ["/flags/ca.svg", "/flags/ch.svg", "/flags/qa.svg", "/flags/ba.svg"],
+    ["/flags/br.svg", "/flags/ma.svg", "/flags/gb-sct.svg", "/flags/ht.svg"],
+    ["/flags/us.svg", "/flags/py.svg", "/flags/au.svg", "/flags/tr.svg"],
+    ["/flags/de.svg", "/flags/ec.svg", "/flags/ci.svg", "/flags/cw.svg"],
+    ["/flags/nl.svg", "/flags/jp.svg", "/flags/tn.svg", "/flags/se.svg"],
+    ["/flags/be.svg", "/flags/ir.svg", "/flags/eg.svg", "/flags/nz.svg"],
+    ["/flags/es.svg", "/flags/uy.svg", "/flags/sa.svg", "/flags/cv.svg"],
+    ["/flags/fr.svg", "/flags/sn.svg", "/flags/no.svg", "/flags/iq.svg"],
+    ["/flags/ar.svg", "/flags/at.svg", "/flags/dz.svg", "/flags/jo.svg"],
+    ["/flags/pt.svg", "/flags/co.svg", "/flags/uz.svg", "/flags/cd.svg"],
+    ["/flags/gb-eng.svg", "/flags/cr.svg", "/flags/pa.svg", "/flags/gh.svg"]
 ];
