@@ -32,7 +32,7 @@ export function MatchupDisplay({ matchups, setMatchups, seedingFunc, nextMatchup
             {matchups.map((matchup) => (
                 <Matchup matchup={matchup}
                          onToggle={onClick}
-                         key={"RO32MatchupNo" + matchup.match_number}
+                         key={type + "MatchupNo" + matchup.match_number}
                          winner={(matchup.winner_location[1] === 0) ? nextMatchups[matchup.winner_location[0]].home : nextMatchups[matchup.winner_location[0]].away}
                          type={type}
                 />

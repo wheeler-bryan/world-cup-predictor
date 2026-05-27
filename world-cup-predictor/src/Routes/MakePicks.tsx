@@ -16,6 +16,11 @@ import {
     finalSeeding,
 } from "../assets/seeding.ts";
 import thirdPlaceTable from "../assets/third_place_table.json"
+import {FinalDisplay} from "../Components/FinalDisplay.tsx";
+import {ChampionDisplay} from "../Components/ChampionDisplay";
+import { SubmitButton } from "../Components/SubmitButton.tsx";
+import { supabase } from '../lib/supabase'
+
 
 // end drag can also check
 // those are the only two that change matchup data => filtered countries, selected third
@@ -131,6 +136,8 @@ export function MakePicks() {
         new MatchupData(null, null, "Winner Semi-final 1", "Winner Semi-final 2", 104, "Sunday, July 19th", [0, 0])
     ]);
 
+    const [champion, setChampion] = useState<(Country | null)>(null);
+
     const checkKO = (c: string, thirdWipe: boolean = false) => {
         console.log("KO PURGING  " + c);
 
@@ -144,6 +151,17 @@ export function MakePicks() {
                 ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
             )
         );
+        setSFMatchups(prev =>
+            prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
+                ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
+            )
+        );
+        setFinalMatchup(prev =>
+            prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
+                ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
+            )
+        );
+        setChampion((c === champion?.name) ? null : champion);
 
         if (thirdWipe && selectedThirdPlaceCountries.filter((country) => country?.name === c).length === 1) {
             for (let i = 0; i < 12; i++) {
@@ -160,10 +178,31 @@ export function MakePicks() {
                             ((thirdWipeCountry === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
                         )
                     );
+                    setSFMatchups(prev =>
+                        prev.map((m: MatchupData) => ((thirdWipeCountry === m.home?.name || thirdWipeCountry === m.away?.name) ?
+                            ((thirdWipeCountry === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
+                        )
+                    );
+                    setFinalMatchup(prev =>
+                        prev.map((m: MatchupData) => ((thirdWipeCountry === m.home?.name || thirdWipeCountry === m.away?.name) ?
+                            ((thirdWipeCountry === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
+                        )
+                    );
+                    setChampion((thirdWipeCountry === champion?.name) ? null : champion);
                 }
             }
         }
     }
+
+    const handleSubmit = async () => {
+        setChampion(champion);
+        const { data, error } = await supabase
+            .from('brackets')
+            .insert({ name: 'Test', email: 'test@test.com', code: '1234', picks: {}, submitted_at: new Date() })
+
+        console.log(data, error)
+    };
+
 
     return(
         <>
@@ -211,6 +250,14 @@ export function MakePicks() {
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">SEMI-FINALS</h1>
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your winners for the semi-finals</h4>
                 <MatchupDisplay matchups={SFMatchups} setMatchups={setFinalMatchup} seedingFunc={finalSeeding} nextMatchups={finalMatchup} type={"SF"}/>
+                <h1 className="mt-[1.5rem] pl-[0.5rem]">FINAL</h1>
+                <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your 2026 World Cup Champion</h4>
+                <FinalDisplay matchup={finalMatchup[0]} setChampion={setChampion} champion={champion}/>
+                <ChampionDisplay champion={champion}/>
+                <br />
+                <div className="flex justify-center pb-[3rem]">
+                    <SubmitButton onClick={handleSubmit}>Submit Picks</SubmitButton>
+                </div>
             </div>
         </>
     );

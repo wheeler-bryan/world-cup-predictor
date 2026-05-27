@@ -14,7 +14,7 @@ export function Checkbox({ country, value, onToggle, index }: {
     const box: string = (value) ? "../src/assets/icons/checked.png" : "../src/assets/icons/unchecked.png";
 
     return (
-        <button onClick={() => onToggle(index)}>
+        <button onClick={() => onToggle(index)} className="cursor-pointer">
             <div className={`flex justify-center items-center ${color} m-[0.75rem] rounded-xl h-[5rem]`}>
                 <img className="ml-[1rem] mr-auto" src={country.flag} alt={country.name + "flag"} height="100rem" width="75rem" />
                 <h3 className="text-center">{country.name}</h3>

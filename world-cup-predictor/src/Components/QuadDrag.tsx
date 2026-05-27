@@ -101,7 +101,7 @@ export function QuadDrag( { id, countries, setCountries, filteredCountries, setF
                 <div className="flex justify-center">
                     {countries.map((country, i) =>
                         (!country.active ?
-                        <button key={country.name + " Button"} id={country.name + " Button"} className="m-[0.5rem] p-[0.25rem] rounded-xl bg-[#ececec] hover:bg-[#e0e0e0]" onClick={() => handleClick(i)}>
+                        <button key={country.name + " Button"} id={country.name + " Button"} className="m-[0.5rem] p-[0.25rem] rounded-xl bg-[#ececec] hover:bg-[#e0e0e0] cursor-pointer" onClick={() => handleClick(i)}>
                             <img src={country.flag} alt={country.abbreviation} height="55rem" width="41rem" />
                             <h3>{country.abbreviation}</h3>
                         </button>
