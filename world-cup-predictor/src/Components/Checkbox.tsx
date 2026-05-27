@@ -11,7 +11,7 @@ export function Checkbox({ country, value, onToggle, index }: {
 })  {
 
     const color: string = (value) ? "bg-green-200 hover:bg-green-300 border-2 border-green-600" : "bg-[#ececec] hover:bg-[#e0e0e0]";
-    const box: string = (value) ? "../src/assets/icons/checked.png" : "../src/assets/icons/unchecked.png";
+    const box: string = (value) ? "/icons/checked.png" : "/icons/unchecked.png";
 
     return (
         <button onClick={() => onToggle(index)} className="cursor-pointer">
