@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import { Home } from './Routes/Home.tsx'
 import { MakePicks } from "./Routes/MakePicks.tsx";
-import {supabase} from "./lib/supabase.ts";
 
 
 function App() {
