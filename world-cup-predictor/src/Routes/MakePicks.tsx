@@ -16,16 +16,19 @@ import {
     finalSeeding,
 } from "../assets/seeding.ts";
 import thirdPlaceTable from "../assets/third_place_table.json"
-import {FinalDisplay} from "../Components/FinalDisplay.tsx";
-import {ChampionDisplay} from "../Components/ChampionDisplay";
+import { FinalDisplay } from "../Components/FinalDisplay.tsx";
+import { ChampionDisplay } from "../Components/ChampionDisplay";
 import { SubmitButton } from "../Components/SubmitButton.tsx";
-import { supabase } from '../lib/supabase'
-
-
-// end drag can also check
-// those are the only two that change matchup data => filtered countries, selected third
+import { InputBox } from "../Components/InputBox.tsx";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabase.ts"
 
 export function MakePicks() {
+
+    const navigate = useNavigate();
+    const [name, setName] = useState("");
+    const [color, setColor] = useState("");
+    const [submissionError, setSubmissionError] = useState("");
 
     // --- GROUP STAGES ---
 
@@ -195,12 +198,65 @@ export function MakePicks() {
     }
 
     const handleSubmit = async () => {
-        setChampion(champion);
-        const { data, error } = await supabase
-            .from('brackets')
-            .insert({ name: 'Test', email: 'test@test.com', code: '1234', picks: {}, submitted_at: new Date() })
+        const code = Math.random().toString(36).substring(2, 6).toUpperCase()
 
-        console.log(data, error)
+       if (filteredCountries.flat().filter(c => c ?? null).length < 48) {
+           setColor("bg-red-600 hover:bg-red-700");
+           setSubmissionError("Not all countries in group stage selected. Please try again");
+           return //error
+       }
+       if (roundOf32Countries.flat().filter(c => c ?? null).length < 32) {
+           setColor("bg-red-600 hover:bg-red-700");
+           setSubmissionError("Not all third place countries selected. Please try again")
+           return // error
+       }
+
+       if ((roundOf16Matchups.filter(m => m.home ?? null).length + roundOf16Matchups.filter(m => m.away ?? null).length) < 16) {
+           setColor("bg-red-600 hover:bg-red-700");
+           setSubmissionError("Not all Round of 32 matchups completed. Please try again")
+           return // error
+       }
+
+        if ((QFMatchups.filter(m => m.home ?? null).length + QFMatchups.filter(m => m.away ?? null).length) < 8) {
+            setColor("bg-red-600 hover:bg-red-700");
+            setSubmissionError("Not all Round of 16 matchups completed. Please try again")
+            return // error
+        }
+
+        if ((SFMatchups.filter(m => m.home ?? null).length + SFMatchups.filter(m => m.away ?? null).length) < 4) {
+            setColor("bg-red-600 hover:bg-red-700");
+            setSubmissionError("Not all quarter-final matchups completed. Please try again")
+            return // error
+        }
+        if (!(finalMatchup[0].home && finalMatchup[0].away)) {
+            setColor("bg-red-600 hover:bg-red-700");
+            setSubmissionError("Not all semi-final matchups completed. Please try again")
+            return // error
+        }
+
+        if (name === "") {
+            setColor("bg-red-600 hover:bg-red-700");
+            setSubmissionError("Please enter your name");
+            return // error
+        }
+        const { error } = await supabase
+            .from('brackets')
+            .insert({
+                name,
+                code,
+                group_stage: filteredCountries,
+                round_of_32: roundOf32Countries,
+                round_of_16: roundOf16Matchups,
+                quarterfinals: QFMatchups,
+                semifinals: SFMatchups,
+                finals: finalMatchup[0],
+                champion: champion,
+                submitted_at: new Date().toISOString(),
+            })
+
+        if (!error) {
+            navigate('/')
+        }
     };
 
 
@@ -254,10 +310,12 @@ export function MakePicks() {
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your 2026 World Cup Champion</h4>
                 <FinalDisplay matchup={finalMatchup[0]} setChampion={setChampion} champion={champion}/>
                 <ChampionDisplay champion={champion}/>
-                <br />
-                <div className="flex justify-center pb-[3rem]">
-                    <SubmitButton onClick={handleSubmit}>Submit Picks</SubmitButton>
-                </div>
+                {(champion) ?
+                    <div className="flex flex-col justify-center items-center pb-[3rem]">
+                        <InputBox value={name} setState={setName} placeholder={"Name"} />
+                        <SubmitButton onClick={handleSubmit} color={color} submissionError={submissionError}>Submit Picks</SubmitButton>
+                    </div>
+                : null}
             </div>
         </>
     );

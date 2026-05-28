@@ -24,7 +24,7 @@ export function InputBox({ value, setState, placeholder, width="", type="text" }
 
     return (
         <input
-            className={`border-[1px] border-[#ececec] border-solid hover:border-[#a2cafe] rounded-[5px] py-[5px] pr-[5px] pl-[15px] text-[14px] font-[Poppins] h-[48px] ${width || "w-[500px]"}`}
+            className={`border-[1px] border-[#ececec] border-solid hover:border-[#a2cafe] rounded-[5px] py-[5px] pr-[5px] pl-[15px] text-[14px] font-[Poppins] shadow-2xl h-[48px] ${width || "w-[500px]"}`}
             value={value}
             onChange={handleChange}
             placeholder={placeholder}
