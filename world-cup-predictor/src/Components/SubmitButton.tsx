@@ -1,18 +1,20 @@
 import React from 'react';
 import "../App.css"
 
-export function SubmitButton({ children, onClick, color, submissionError }:{
+export function SubmitButton({ children, onClick, color, submissionError, pt }:{
     children: string,
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void,
     color?: string,
     submissionError?: string,
+    pt?: string,
 }) {
 
-    const bg_color: string = (color) ? color : "bg-blue-500 hover:bg-blue-600";
+    const bg_color: string = (color) ? color : "bg-blue-500 hover:bg-blue-600 w-[12.375rem] h-[3.25rem]";
+    const pt_passed: string = (pt) ? pt : "pt-[20px]";
 
     return(
-        <div className="flex flex-col justify-center items-center pt-[20px]">
-            <button className={`font-[Poppins] ${bg_color} text-white w-[198px] h-[52px] rounded-[5px] cursor-pointer`} onClick={onClick}>{children}</button>
+        <div className={`flex flex-col justify-center items-center ${pt_passed}`}>
+            <button className={`font-[Poppins] ${bg_color} text-white rounded-[5px] cursor-pointer`} onClick={onClick}>{children}</button>
             <h2 className="pt-[1rem] text-red-700 text-center">{submissionError}</h2>
         </div>
         //hover:bg-[#00008B]

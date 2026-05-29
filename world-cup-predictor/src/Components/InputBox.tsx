@@ -8,17 +8,7 @@ export function InputBox({ value, setState, placeholder, type="text" }: {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value;
-
-        if (type === "password") {
-            if (input.length > 6) {
-                setState(value)
-            } else {
-            const cleaned = input.replace(/[^0-9]/g, "");
-            setState(cleaned);
-            }
-        } else {
-            setState(input);
-        }
+        setState(input)
     };
 
     return (

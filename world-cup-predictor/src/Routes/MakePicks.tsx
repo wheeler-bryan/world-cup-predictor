@@ -1,7 +1,7 @@
 import "../App.css"
 import { QuadDrag } from "../Components/QuadDrag.tsx"
 import { letters, groups, abbreviations, flags, Country } from "../assets/countries.ts"
-import { useMemo, useState} from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ThirdPlace } from "../Components/ThirdPlace.tsx";
 import { MatchupDisplay } from "../Components/MatchupDisplay.tsx";
 import {
@@ -20,15 +20,18 @@ import { FinalDisplay } from "../Components/FinalDisplay.tsx";
 import { ChampionDisplay } from "../Components/ChampionDisplay";
 import { SubmitButton } from "../Components/SubmitButton.tsx";
 import { InputBox } from "../Components/InputBox.tsx";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase.ts"
 
 export function MakePicks() {
 
     const navigate = useNavigate();
+    const location = useLocation()
+
     const [name, setName] = useState("");
     const [color, setColor] = useState("");
     const [submissionError, setSubmissionError] = useState("");
+    const [currentCode, setCurrentCode] = useState("");
 
     // --- GROUP STAGES ---
 
@@ -198,7 +201,7 @@ export function MakePicks() {
     }
 
     const handleSubmit = async () => {
-        const code = Math.random().toString(36).substring(2, 6).toUpperCase()
+        const code: string = (currentCode !== "") ? currentCode : Math.random().toString(36).substring(2, 6).toUpperCase(); // see if there is already a code
 
        if (filteredCountries.flat().filter(c => c ?? null).length < 48) {
            setColor("bg-red-600 hover:bg-red-700");
@@ -245,7 +248,7 @@ export function MakePicks() {
                 name,
                 code,
                 group_stage: filteredCountries,
-                round_of_32: roundOf32Countries,
+                third_place: selectedThirdPlaceCountries,
                 round_of_16: roundOf16Matchups,
                 quarterfinals: QFMatchups,
                 semifinals: SFMatchups,
@@ -255,9 +258,24 @@ export function MakePicks() {
             })
 
         if (!error) {
-            navigate('/')
+            navigate('/bracket_submitted',  { state: { code: code, name: name } })
         }
     };
+
+
+    useEffect(() => {
+        if (location.state) {
+            setName(location.state.name);
+            setCurrentCode(location.state.code);
+            setFilteredCountries(location.state.group_stage);
+            setSelectedThirdPlaceCountries(location.state.third_place);
+            setRoundOf16Matchups(location.state.round_of_16);
+            setQFMatchups(location.state.quarterfinals);
+            setSFMatchups(location.state.semifinals);
+            setFinalMatchup([location.state.finals]);
+            setChampion(location.state.champion);
+        }
+    }, [])
 
 
     return(
