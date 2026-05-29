@@ -32,6 +32,7 @@ export function MakePicks() {
     const [color, setColor] = useState("");
     const [submissionError, setSubmissionError] = useState("");
     const [currentCode, setCurrentCode] = useState("");
+    const [goldenBoot, setGoldenBoot] = useState("");
 
     // --- GROUP STAGES ---
 
@@ -119,30 +120,38 @@ export function MakePicks() {
 
     const [champion, setChampion] = useState<(Country | null)>(null);
 
-    const checkKO = (c: string, thirdWipe: boolean = false) => {
+    const checkKO = (c: string, thirdWipe: boolean = false, type: string = "") => {
         console.log("KO PURGING  " + c);
-
-        setRoundOf16Matchups(prev =>
-            prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
-                ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
-            )
-        );
-        setQFMatchups(prev =>
-            prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
-                ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
-            )
-        );
-        setSFMatchups(prev =>
-            prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
-                ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
-            )
-        );
-        setFinalMatchup(prev =>
-            prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
-                ((c === m.home?.name) ? { ...m, home: null } : { ...m, away: null }) : m)
-            )
-        );
-        setChampion((c === champion?.name) ? null : champion);
+        //RO32, RO16, QF, SF, F, ""
+        if (type === "RO32" || type === "") {
+            setRoundOf16Matchups(prev =>
+                prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
+                    ((c === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
+                )
+            );
+        }
+        if (type === "RO32" || type === "" || type === "RO16") {
+            setQFMatchups(prev =>
+                prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
+                    ((c === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
+                )
+            );
+        }
+        if (type !== "F" && type !== "SF") {
+            setSFMatchups(prev =>
+                prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
+                    ((c === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
+                )
+            );
+        }
+        if (type !== "F") {
+            setFinalMatchup(prev =>
+                prev.map((m: MatchupData) => ((c === m.home?.name || c === m.away?.name) ?
+                    ((c === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
+                )
+            );
+        }
+        setChampion(prev => (c === prev?.name) ? null : prev);
 
         if (thirdWipe && selectedThirdPlaceCountries.filter((country) => country?.name === c).length === 1) {
             for (let i = 0; i < 12; i++) {
@@ -169,7 +178,8 @@ export function MakePicks() {
                             ((thirdWipeCountry === m.home?.name) ? {...m, home: null} : {...m, away: null}) : m)
                         )
                     );
-                    setChampion((thirdWipeCountry === champion?.name) ? null : champion);
+                    setChampion(prev => (thirdWipeCountry === prev?.name) ? null : prev);
+
                 }
             }
         }
@@ -228,6 +238,7 @@ export function MakePicks() {
             semifinals: SFMatchups,
             finals: finalMatchup[0],
             champion: champion,
+            golden_boot: goldenBoot,
             submitted_at: new Date().toISOString(),
         }
         const query = location.state
@@ -251,6 +262,8 @@ export function MakePicks() {
         setSFMatchups(SFDefault);
         setFinalMatchup(finalDefault);
         setChampion(null);
+        setName("");
+        setGoldenBoot("");
     }
 
 
@@ -265,6 +278,7 @@ export function MakePicks() {
             setSFMatchups(location.state.semifinals);
             setFinalMatchup([location.state.finals]);
             setChampion(location.state.champion);
+            setGoldenBoot(location.state.golden_boot);
         }
     }, [location.state])
 
@@ -300,19 +314,19 @@ export function MakePicks() {
                 />
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">ROUND OF 32</h1>
                 <h4 className="mb-[1.5rem] pl-[0.5rem]"> Select your winners for all 16 matches</h4>
-                <MatchupDisplay matchups={roundOf32Matchups} setMatchups={setRoundOf16Matchups} seedingFunc={roundOf16Seeding} nextMatchups={roundOf16Matchups} type={"RO"} />
+                <MatchupDisplay matchups={roundOf32Matchups} setMatchups={setRoundOf16Matchups} seedingFunc={roundOf16Seeding} nextMatchups={roundOf16Matchups} type={"RO32"} checkKO={checkKO} />
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">ROUND OF 16</h1>
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your winners for all eight matches</h4>
-                <MatchupDisplay matchups={roundOf16Matchups} setMatchups={setQFMatchups} seedingFunc={QFSeeding} nextMatchups={QFMatchups} type={"RO"}/>
+                <MatchupDisplay matchups={roundOf16Matchups} setMatchups={setQFMatchups} seedingFunc={QFSeeding} nextMatchups={QFMatchups} type={"RO16"} checkKO={checkKO}/>
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">QUARTER-FINALS</h1>
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your winners for the quarter-finals</h4>
-                <MatchupDisplay matchups={QFMatchups} setMatchups={setSFMatchups} seedingFunc={SFSeeding} nextMatchups={SFMatchups} type={"QF"}/>
+                <MatchupDisplay matchups={QFMatchups} setMatchups={setSFMatchups} seedingFunc={SFSeeding} nextMatchups={SFMatchups} type={"QF"} checkKO={checkKO}/>
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">SEMI-FINALS</h1>
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your winners for the semi-finals</h4>
-                <MatchupDisplay matchups={SFMatchups} setMatchups={setFinalMatchup} seedingFunc={finalSeeding} nextMatchups={finalMatchup} type={"SF"}/>
+                <MatchupDisplay matchups={SFMatchups} setMatchups={setFinalMatchup} seedingFunc={finalSeeding} nextMatchups={finalMatchup} type={"SF"} checkKO={checkKO}/>
                 <h1 className="mt-[1.5rem] pl-[0.5rem]">FINAL</h1>
                 <h4 className="pl-[0.5rem] mb-[1.5rem]">Select your 2026 World Cup Champion</h4>
-                <FinalDisplay matchup={finalMatchup[0]} setChampion={setChampion} champion={champion}/>
+                <FinalDisplay matchup={finalMatchup[0]} setChampion={setChampion} champion={champion} />
                 <ChampionDisplay champion={champion}/>
                 {(champion) ?
                     <div className="flex flex-col justify-center items-center pb-[3rem]">
@@ -321,6 +335,8 @@ export function MakePicks() {
                             <SubmitButton onClick={handleSubmit} color={color} submissionError={submissionError}>Submit Picks</SubmitButton>
                             <SubmitButton onClick={handleClear} color={"bg-gray-300 hover:bg-gray-400"}>Clear Picks</SubmitButton>
                         </div>
+                        <h2>Bonus: Golden Boot Winner</h2>
+                        <InputBox value={goldenBoot} setState={setGoldenBoot} placeholder={"Player e.g. Christian Pulisic"} />
                     </div>
                 : null}
             </div>

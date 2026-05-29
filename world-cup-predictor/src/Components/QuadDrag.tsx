@@ -23,7 +23,15 @@ export function QuadDrag( { id, countries, filteredCountries, setFilteredCountri
     // sets that index of a country to active and appends to filtered countries
     // only way to get a country INTO filtered countries
     const handleClick = (index: number) => {
-        setFilteredCountries(prev => [...prev, countries[index]]);
+        if (filteredCountries.length === 2) {
+            const fourthPlace = countries.filter((c, i) =>
+                i !== index && !filteredCountries.some(fc => fc?.name === c.name)
+            );
+
+            setFilteredCountries(prev => [...prev, countries[index], fourthPlace[0]]); // countries.filter those that arent in ...
+        } else {
+            setFilteredCountries(prev => [...prev, countries[index]]);
+        }
     };
 
     // handles changing the indices of the countries once they are dragged
@@ -79,11 +87,11 @@ export function QuadDrag( { id, countries, filteredCountries, setFilteredCountri
                 console.log("last shift")
             }
 
-            for (offset; offset < num_purge; offset++) {
-                if (offset !== 2) {
-                    checkKO(filteredCountries[offset].name)
+            for (let i: number = offset; i < num_purge + offset; i++) {
+                if (i !== 2) {
+                    checkKO(filteredCountries[i].name);
                 } else {
-                    checkKO(filteredCountries[offset].name, third_wipe)
+                    checkKO(filteredCountries[i].name, third_wipe);
                 }
             }
         }

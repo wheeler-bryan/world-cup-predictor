@@ -11,7 +11,7 @@ export function Matchup({ matchup, onToggle, winner, type } : {
     type: string
 }) {
 
-    const size: string = (type === "RO") ? "w-[22rem] h-[8rem] max-w-[30rem]" :
+    const size: string = (type === "RO32" || type === "RO16") ? "w-[22rem] h-[8rem] max-w-[30rem]" :
         (type === "QF") ? "w-[22rem] h-[11rem] max-w-[30rem]" :
             (type === "SF") ? "md:w-[30rem] md:h-[11rem] md:max-w-[40rem] h-[11rem] w-[22rem]" : "w-[30rem] h-[11rem] max-w-[40rem]";
 

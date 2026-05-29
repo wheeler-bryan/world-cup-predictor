@@ -42,7 +42,8 @@ export function Home() {
                     quarterfinals: data.quarterfinals,
                     semifinals: data.semifinals,
                     finals: data.finals,
-                    champion: data.champion
+                    champion: data.champion,
+                    golden_boot: data.golden_boot
             }})
         }
     }
