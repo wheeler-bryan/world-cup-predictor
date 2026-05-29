@@ -23,7 +23,7 @@ export function Matchup({ matchup, onToggle, winner, type } : {
                             country={matchup.home}
                             match_number={matchup.match_number}
                             key={"MatchupButtonHome" + matchup.match_number.toString()}
-                            winner={winner === matchup.home}
+                            winner={winner?.name === matchup.home?.name}
                             placeholder={matchup.home_placeholder}
                             type={type} />
 
@@ -31,7 +31,7 @@ export function Matchup({ matchup, onToggle, winner, type } : {
                             country={matchup.away}
                             match_number={matchup.match_number}
                             key={"MatchupButtonAway" + matchup.match_number.toString()}
-                            winner={winner === matchup.away}
+                            winner={winner?.name === matchup.away?.name}
                             placeholder={matchup.away_placeholder}
                             type={type} />
             </div>

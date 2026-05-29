@@ -33,7 +33,11 @@ export function MatchupDisplay({ matchups, setMatchups, seedingFunc, nextMatchup
                 <Matchup matchup={matchup}
                          onToggle={onClick}
                          key={type + "MatchupNo" + matchup.match_number}
-                         winner={(matchup.winner_location[1] === 0) ? nextMatchups[matchup.winner_location[0]].home : nextMatchups[matchup.winner_location[0]].away}
+                         winner={
+                            (matchup.winner_location[1] === 0) ? // is the matchups winning location a home or away slot?
+                            nextMatchups[matchup.winner_location[0]].home : // if home, check the next matchup index home team, (Country | null)
+                            nextMatchups[matchup.winner_location[0]].away // if away, check next matchups at that index
+                         }
                          type={type}
                 />
             ))}

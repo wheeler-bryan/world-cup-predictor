@@ -14,9 +14,9 @@ function App() {
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/makepicks" element={<MakePicks />} />
-              <Route path="bracket_submitted" element={<BracketSubmitted />} />
-              <Route path="leaderboard" element={<Leaderboard />} />
-              <Route path="leaderboard_testing" element={<ProductionLeaderboard />} />
+              <Route path="/bracket_submitted" element={<BracketSubmitted />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/leaderboard_testing" element={<ProductionLeaderboard />} />
           </Routes>
         </BrowserRouter>
     </>

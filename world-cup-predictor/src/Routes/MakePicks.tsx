@@ -13,7 +13,7 @@ import {
     roundOf16Seeding,
     QFSeeding,
     SFSeeding,
-    finalSeeding,
+    finalSeeding, roundOf16Default, QFDefault, thirdDefault, groupDefault, SFDefault, finalDefault,
 } from "../assets/seeding.ts";
 import thirdPlaceTable from "../assets/third_place_table.json"
 import { FinalDisplay } from "../Components/FinalDisplay.tsx";
@@ -36,16 +36,12 @@ export function MakePicks() {
     // --- GROUP STAGES ---
 
     //create countries
-    const [countries, setCountries] = useState<Country[][]>(
-        groups.map((group, upperIndex) =>
+    const countries: Country[][] = groups.map((group, upperIndex) =>
             group.map((country, index) => new Country(country, abbreviations[upperIndex][index], flags[upperIndex][index]))
-        )
     );
 
     //save current rankings of each country
-    const [filteredCountries, setFilteredCountries] = useState<Country[][]>([
-        [], [], [], [], [], [], [], [], [], [], [], []
-    ]);
+    const [filteredCountries, setFilteredCountries] = useState<Country[][]>(groupDefault);
 
     // --- THIRD PLACE COUNTRIES --
 
@@ -54,9 +50,7 @@ export function MakePicks() {
         [filteredCountries]
     );
 
-    const [selectedThirdPlaceCountries, setSelectedThirdPlaceCountries] = useState<(Country | null)[]>(
-        [null, null, null, null, null, null, null, null, null, null, null, null]
-    );
+    const [selectedThirdPlaceCountries, setSelectedThirdPlaceCountries] = useState<(Country | null)[]>(thirdDefault);
 
     const checkSelectedThird = (group: string) => {
         const index = group.charCodeAt(0) - 65;
@@ -115,32 +109,13 @@ export function MakePicks() {
         [roundOf32Countries]
     );
 
-    const [roundOf16Matchups, setRoundOf16Matchups] = useState<MatchupData[]>([
-        new MatchupData(null, null, "Winner Match 74", "Winner Match 77", 89, "Saturday, July 4th", [0, 0]),
-        new MatchupData(null, null, "Winner Match 73", "Winner Match 75", 90, "Saturday, July 4th", [0, 1]),
-        new MatchupData(null, null, "Winner Match 76", "Winner Match 78", 91, "Sunday, July 5th", [2, 0]),
-        new MatchupData(null, null, "Winner Match 79", "Winner Match 80", 92, "Sunday, July 5th", [2, 1]),
-        new MatchupData(null, null, "Winner Match 83", "Winner Match 84", 93, "Monday, July 6th", [1, 0]),
-        new MatchupData(null, null, "Winner Match 81", "Winner Match 82", 94, "Monday, July 6th", [1,1]),
-        new MatchupData(null, null, "Winner Match 86", "Winner Match 88", 95, "Tuesday, July 7th", [3, 0]),
-        new MatchupData(null, null, "Winner Match 85", "Winner Match 87", 96, "Tuesday, July 7th", [3,1]),
-    ]);
+    const [roundOf16Matchups, setRoundOf16Matchups] = useState<MatchupData[]>(roundOf16Default);
 
-    const [QFMatchups, setQFMatchups] = useState<MatchupData[]>([
-        new MatchupData(null, null, "Winner Match 89", "Winner Match 90", 97, "Thursday, July 9th", [0, 0]),
-        new MatchupData(null, null, "Winner Match 93", "Winner Match 94", 98, "Friday, July 10th", [0,1]),
-        new MatchupData(null, null, "Winner Match 91", "Winner Match 92", 99, "Saturday, July 11th", [1, 0]),
-        new MatchupData(null, null, "Winner Match 95", "Winner Match 96", 100, "Saturday, July 11th", [1,1]),
-    ]);
+    const [QFMatchups, setQFMatchups] = useState<MatchupData[]>(QFDefault);
 
-    const [SFMatchups, setSFMatchups] = useState<MatchupData[]>([
-        new MatchupData(null, null, "Winner Quarter-final 1", "Winner Quarter-final 2", 101, "Tuesday, July 14th", [0, 0]),
-        new MatchupData(null, null, "Winner Quarter-final 3", "Winner Quarter-final 4", 102, "Wednesday, July 15th", [0, 1]),
-    ]);
+    const [SFMatchups, setSFMatchups] = useState<MatchupData[]>(SFDefault);
 
-    const [finalMatchup, setFinalMatchup] = useState<MatchupData[]>([
-        new MatchupData(null, null, "Winner Semi-final 1", "Winner Semi-final 2", 104, "Sunday, July 19th", [0, 0])
-    ]);
+    const [finalMatchup, setFinalMatchup] = useState<MatchupData[]>(finalDefault);
 
     const [champion, setChampion] = useState<(Country | null)>(null);
 
@@ -242,25 +217,41 @@ export function MakePicks() {
             setSubmissionError("Please enter your name");
             return // error
         }
-        const { error } = await supabase
-            .from('brackets')
-            .insert({
-                name,
-                code,
-                group_stage: filteredCountries,
-                third_place: selectedThirdPlaceCountries,
-                round_of_16: roundOf16Matchups,
-                quarterfinals: QFMatchups,
-                semifinals: SFMatchups,
-                finals: finalMatchup[0],
-                champion: champion,
-                submitted_at: new Date().toISOString(),
-            })
+
+        const payload = {
+            name,
+            code,
+            group_stage: filteredCountries,
+            third_place: selectedThirdPlaceCountries,
+            round_of_16: roundOf16Matchups,
+            quarterfinals: QFMatchups,
+            semifinals: SFMatchups,
+            finals: finalMatchup[0],
+            champion: champion,
+            submitted_at: new Date().toISOString(),
+        }
+        const query = location.state
+            ? supabase.from('brackets').update(payload).eq('code', code)
+            : supabase.from('brackets').insert(payload);
+
+        const { error } = await query;
 
         if (!error) {
-            navigate('/bracket_submitted',  { state: { code: code, name: name } })
+            navigate('/bracket_submitted', { state: { code, name } });
         }
+
+
     };
+
+    const handleClear = () => {
+        setFilteredCountries(groupDefault);
+        setSelectedThirdPlaceCountries(thirdDefault);
+        setRoundOf16Matchups(roundOf16Default);
+        setQFMatchups(QFDefault);
+        setSFMatchups(SFDefault);
+        setFinalMatchup(finalDefault);
+        setChampion(null);
+    }
 
 
     useEffect(() => {
@@ -275,7 +266,7 @@ export function MakePicks() {
             setFinalMatchup([location.state.finals]);
             setChampion(location.state.champion);
         }
-    }, [])
+    }, [location.state])
 
 
     return(
@@ -289,11 +280,6 @@ export function MakePicks() {
                             key={"Group " + letters[index]}
                             id={letters[index]}
                             countries={countries}
-                            setCountries={(newRow) =>
-                                setCountries(prev =>
-                                    prev.map((r, i) => i === index ? (typeof newRow === 'function' ? newRow(r) : newRow) : r)
-                                )
-                            }
                             filteredCountries={filteredCountries[index]}
                             setFilteredCountries={(newRow) =>
                                 setFilteredCountries(prev =>
@@ -331,7 +317,10 @@ export function MakePicks() {
                 {(champion) ?
                     <div className="flex flex-col justify-center items-center pb-[3rem]">
                         <InputBox value={name} setState={setName} placeholder={"Name"} />
-                        <SubmitButton onClick={handleSubmit} color={color} submissionError={submissionError}>Submit Picks</SubmitButton>
+                        <div className="flex justify-center items-center gap-4">
+                            <SubmitButton onClick={handleSubmit} color={color} submissionError={submissionError}>Submit Picks</SubmitButton>
+                            <SubmitButton onClick={handleClear} color={"bg-gray-300 hover:bg-gray-400"}>Clear Picks</SubmitButton>
+                        </div>
                     </div>
                 : null}
             </div>

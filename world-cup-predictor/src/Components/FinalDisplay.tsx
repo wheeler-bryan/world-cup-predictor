@@ -23,7 +23,7 @@ export function FinalDisplay({ matchup, setChampion, champion } : {
                                 country={matchup.home}
                                 match_number={matchup.match_number}
                                 key={"MatchupButtonHome" + matchup.match_number.toString()}
-                                winner={champion === matchup.home}
+                                winner={champion?.name === matchup.home?.name}
                                 placeholder={matchup.home_placeholder}
                                 type={"F"} />
 
@@ -31,7 +31,7 @@ export function FinalDisplay({ matchup, setChampion, champion } : {
                                 country={matchup.away}
                                 match_number={matchup.match_number}
                                 key={"MatchupButtonAway" + matchup.match_number.toString()}
-                                winner={champion === matchup.away}
+                                winner={champion?.name === matchup.away?.name}
                                 placeholder={matchup.away_placeholder}
                                 type={"F"} />
                 </div>

@@ -48,15 +48,15 @@ export function Home() {
     }
 
     return (
-        <div className="bg-[url('/world-cup-cover.jpg')] bg-cover bg-center h-screen">
+        <div className="bg-[url('/qatar-stadium.png')] bg-cover bg-center h-screen">
             <div className="flex flex-col items-center justify-center h-screen">
                 <div className="bg-white flex flex-col shadow-2xl shadow-black items-center justify-center rounded-4xl p-8">
                     <h1 className="font-[Poppins] text-5xl text-center font-bold rounded-4xl text-black bg-white p-4">Welcome to the World Cup Prediction App!</h1>
                     { (!edit) ?
                         <div className="flex gap-4 justify-center items-center">
-                            <SubmitButton onClick={handleClick1} pt={"pt-[0.375rem]"} color={"bg-blue-500 hover:bg-blue-600 w-[7rem] h-[4rem] md:w-[12.375rem] md:h-[3.25rem]"}>Make Picks</SubmitButton>
-                            <SubmitButton onClick={handleClick2} pt={"pt-[0.375rem]"} color={"bg-blue-500 hover:bg-blue-600 w-[7rem] h-[4rem] md:w-[12.375rem] md:h-[3.25rem]"}>Edit/View Picks</SubmitButton>
-                            <SubmitButton onClick={handleClick3} pt={"pt-[0.375rem]"} color={"bg-blue-500 hover:bg-blue-600 w-[7rem] h-[4rem] md:w-[12.375rem] md:h-[3.25rem]"}>View Leaderboard</SubmitButton>
+                            <SubmitButton onClick={handleClick1} pt={"pt-[0.375rem]"} color={"bg-blue-500 hover:bg-blue-600"} width={"w-[7rem] h-[4rem] md:w-[12.375rem] md:h-[3.25rem]"}>Make Picks</SubmitButton>
+                            <SubmitButton onClick={handleClick2} pt={"pt-[0.375rem]"} color={"bg-blue-500 hover:bg-blue-600"} width={"w-[7rem] h-[4rem] md:w-[12.375rem] md:h-[3.25rem]"}>Edit/View Picks</SubmitButton>
+                            <SubmitButton onClick={handleClick3} pt={"pt-[0.375rem]"} color={"bg-blue-500 hover:bg-blue-600"} width={"w-[7rem] h-[4rem] md:w-[12.375rem] md:h-[3.25rem]"}>View Leaderboard</SubmitButton>
                         </div>
                         :
                         <div className="flex flex-col gap-4 justify-center items-center">

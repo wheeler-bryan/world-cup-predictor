@@ -38,6 +38,37 @@ export class MatchupData {
     }
 }
 
+export const groupDefault: Country[][] = [[], [], [], [], [], [], [], [], [], [], [], []];
+
+export const thirdDefault: (Country | null)[] = [null, null, null, null, null, null, null, null, null, null, null, null];
+
+export const roundOf16Default: MatchupData[] = [
+    new MatchupData(null, null, "Winner Match 74", "Winner Match 77", 89, "Saturday, July 4th", [0, 0]),
+    new MatchupData(null, null, "Winner Match 73", "Winner Match 75", 90, "Saturday, July 4th", [0, 1]),
+    new MatchupData(null, null, "Winner Match 76", "Winner Match 78", 91, "Sunday, July 5th", [2, 0]),
+    new MatchupData(null, null, "Winner Match 79", "Winner Match 80", 92, "Sunday, July 5th", [2, 1]),
+    new MatchupData(null, null, "Winner Match 83", "Winner Match 84", 93, "Monday, July 6th", [1, 0]),
+    new MatchupData(null, null, "Winner Match 81", "Winner Match 82", 94, "Monday, July 6th", [1,1]),
+    new MatchupData(null, null, "Winner Match 86", "Winner Match 88", 95, "Tuesday, July 7th", [3, 0]),
+    new MatchupData(null, null, "Winner Match 85", "Winner Match 87", 96, "Tuesday, July 7th", [3,1]),
+];
+
+export const QFDefault: MatchupData[] = [
+    new MatchupData(null, null, "Winner Match 89", "Winner Match 90", 97, "Thursday, July 9th", [0, 0]),
+    new MatchupData(null, null, "Winner Match 93", "Winner Match 94", 98, "Friday, July 10th", [0,1]),
+    new MatchupData(null, null, "Winner Match 91", "Winner Match 92", 99, "Saturday, July 11th", [1, 0]),
+    new MatchupData(null, null, "Winner Match 95", "Winner Match 96", 100, "Saturday, July 11th", [1,1]),
+];
+
+export const SFDefault: MatchupData[] = [
+    new MatchupData(null, null, "Winner Quarter-final 1", "Winner Quarter-final 2", 101, "Tuesday, July 14th", [0, 0]),
+    new MatchupData(null, null, "Winner Quarter-final 3", "Winner Quarter-final 4", 102, "Wednesday, July 15th", [0, 1]),
+]
+
+export const finalDefault: MatchupData[] = [
+    new MatchupData(null, null, "Winner Semi-final 1", "Winner Semi-final 2", 104, "Sunday, July 19th", [0, 0])
+]
+
 export function roundOf16Seeding(match_number: number) {
     let index: number = -1;
     let home: boolean = true;

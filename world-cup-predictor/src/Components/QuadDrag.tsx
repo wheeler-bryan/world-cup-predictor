@@ -7,10 +7,9 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { Country } from '../assets/countries.ts'
 import { MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 
-export function QuadDrag( { id, countries, setCountries, filteredCountries, setFilteredCountries, checkThird, checkKO } : {
+export function QuadDrag( { id, countries, filteredCountries, setFilteredCountries, checkThird, checkKO } : {
     id: string,
     countries: Country[],
-    setCountries: Dispatch<SetStateAction<Country[]>>,
     filteredCountries: Country[],
     setFilteredCountries: Dispatch<SetStateAction<Country[]>>,
     checkThird: (group: string) => void,
@@ -24,10 +23,6 @@ export function QuadDrag( { id, countries, setCountries, filteredCountries, setF
     // sets that index of a country to active and appends to filtered countries
     // only way to get a country INTO filtered countries
     const handleClick = (index: number) => {
-        setCountries(prev => prev.map((country, i) =>
-            i === index ? { ...country, active: true } : country
-        ));
-
         setFilteredCountries(prev => [...prev, countries[index]]);
     };
 
