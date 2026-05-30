@@ -279,7 +279,7 @@ export function MakePicks() {
         <>
             <div className="h-screen">
                 <h1 className="pl-[0.5rem]">GROUP STAGES</h1>
-                <h4 className="pl-[0.5rem] mb-[1.5rem]">Predict the outcome of each group</h4>
+                <h4 className="pl-[0.5rem] mb-[1.5rem]">Predict the outcome of each group. Click and drag to order.</h4>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 ml-[3rem] mr-[3rem] justify-items-center">
                     {countries.map((countries, index) =>
                         <QuadDrag
