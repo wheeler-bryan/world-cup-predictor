@@ -1,7 +1,7 @@
 import "../App.css"
 import { QuadDrag } from "../Components/QuadDrag.tsx"
 import { letters, groups, abbreviations, flags, Country } from "../assets/countries.ts"
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ThirdPlace } from "../Components/ThirdPlace.tsx";
 import { MatchupDisplay } from "../Components/MatchupDisplay.tsx";
 import {
@@ -29,7 +29,6 @@ export function MakePicks() {
     const location = useLocation()
 
     const [name, setName] = useState("");
-    const [color, setColor] = useState("");
     const [submissionError, setSubmissionError] = useState("");
     const [currentCode, setCurrentCode] = useState("");
     const [goldenBoot, setGoldenBoot] = useState("");
@@ -189,42 +188,35 @@ export function MakePicks() {
         const code: string = (currentCode !== "") ? currentCode : Math.random().toString(36).substring(2, 6).toUpperCase(); // see if there is already a code
 
        if (filteredCountries.flat().filter(c => c ?? null).length < 48) {
-           setColor("bg-red-600 hover:bg-red-700");
            setSubmissionError("Not all countries in group stage selected. Please try again");
            return //error
        }
        if (roundOf32Countries.flat().filter(c => c ?? null).length < 32) {
-           setColor("bg-red-600 hover:bg-red-700");
            setSubmissionError("Not all third place countries selected. Please try again")
            return // error
        }
 
        if ((roundOf16Matchups.filter(m => m.home ?? null).length + roundOf16Matchups.filter(m => m.away ?? null).length) < 16) {
-           setColor("bg-red-600 hover:bg-red-700");
            setSubmissionError("Not all Round of 32 matchups completed. Please try again")
            return // error
        }
 
         if ((QFMatchups.filter(m => m.home ?? null).length + QFMatchups.filter(m => m.away ?? null).length) < 8) {
-            setColor("bg-red-600 hover:bg-red-700");
-            setSubmissionError("Not all Round of 16 matchups completed. Please try again")
+             setSubmissionError("Not all Round of 16 matchups completed. Please try again")
             return // error
         }
 
         if ((SFMatchups.filter(m => m.home ?? null).length + SFMatchups.filter(m => m.away ?? null).length) < 4) {
-            setColor("bg-red-600 hover:bg-red-700");
-            setSubmissionError("Not all quarter-final matchups completed. Please try again")
+             setSubmissionError("Not all quarter-final matchups completed. Please try again")
             return // error
         }
         if (!(finalMatchup[0].home && finalMatchup[0].away)) {
-            setColor("bg-red-600 hover:bg-red-700");
-            setSubmissionError("Not all semi-final matchups completed. Please try again")
+             setSubmissionError("Not all semi-final matchups completed. Please try again")
             return // error
         }
 
         if (name === "") {
-            setColor("bg-red-600 hover:bg-red-700");
-            setSubmissionError("Please enter your name");
+             setSubmissionError("Please enter your name");
             return // error
         }
 
@@ -332,9 +324,11 @@ export function MakePicks() {
                     <div className="flex flex-col justify-center items-center pb-[3rem]">
                         <InputBox value={name} setState={setName} placeholder={"Name"} />
                         <div className="flex justify-center items-center gap-4">
-                            <SubmitButton onClick={handleSubmit} color={color} submissionError={submissionError}>Submit Picks</SubmitButton>
+                            <SubmitButton onClick={handleSubmit}>Submit Picks</SubmitButton>
                             <SubmitButton onClick={handleClear} color={"bg-gray-300 hover:bg-gray-400"}>Clear Picks</SubmitButton>
                         </div>
+                        {(submissionError) ? <h2 className="pt-[1rem] pb-[1rem] text-red-700 text-center">{submissionError}</h2>
+                            : null}
                         <h2>Bonus: Golden Boot Winner</h2>
                         <InputBox value={goldenBoot} setState={setGoldenBoot} placeholder={"Player e.g. Christian Pulisic"} />
                     </div>

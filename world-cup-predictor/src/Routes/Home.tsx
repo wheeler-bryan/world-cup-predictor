@@ -10,6 +10,7 @@ export function Home() {
     const [edit, setEdit] = useState<boolean>(false);
     const [name, setName] = useState("");
     const [code, setCode] = useState("");
+    const [submissionError, setSubmissionError] = useState("");
 
     const handleClick1 = (): void => {
         navigate("/makepicks");
@@ -45,6 +46,8 @@ export function Home() {
                     champion: data.champion,
                     golden_boot: data.golden_boot
             }})
+        } else {
+            setSubmissionError("Error: Incorrect name or code");
         }
     }
 
@@ -64,7 +67,7 @@ export function Home() {
                             <h2 className="text-center">Enter your name and edit code</h2>
                             <InputBox value={name} setState={setName} placeholder={"Name"} />
                             <InputBox value={code} setState={setCode} placeholder={"Code"} />
-                            <SubmitButton onClick={handleClick4}>Check your picks</SubmitButton>
+                            <SubmitButton onClick={handleClick4} submissionError={submissionError}>Check your picks</SubmitButton>
                         </div>
                     }
                 </div>
