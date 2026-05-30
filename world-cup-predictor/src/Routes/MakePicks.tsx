@@ -1,7 +1,7 @@
 import "../App.css"
 import { QuadDrag } from "../Components/QuadDrag.tsx"
 import { letters, groups, abbreviations, flags, Country } from "../assets/countries.ts"
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ThirdPlace } from "../Components/ThirdPlace.tsx";
 import { MatchupDisplay } from "../Components/MatchupDisplay.tsx";
 import {
