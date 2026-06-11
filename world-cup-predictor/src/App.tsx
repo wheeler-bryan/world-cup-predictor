@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import { Leaderboard } from "./Routes/Leaderboard.tsx";
 import { ProductionLeaderboard } from "./Routes/ProductionLeaderboard.tsx";
 
 function App() {
@@ -9,8 +8,7 @@ function App() {
     <>
         <BrowserRouter>
           <Routes>
-              <Route path="/" element={<Leaderboard />} />
-              <Route path="/leaderboard_testing" element={<ProductionLeaderboard />} />
+              <Route path="/" element={<ProductionLeaderboard />} />
           </Routes>
         </BrowserRouter>
     </>

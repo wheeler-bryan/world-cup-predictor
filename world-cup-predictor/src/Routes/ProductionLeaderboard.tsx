@@ -84,7 +84,7 @@ export function ProductionLeaderboard() {
 
     return(
         <div>
-            <h1>Leaderboard</h1>
+            <h1 className="text-center">Leaderboard</h1>
             <div className="flex flex-col w-full">
                 {brackets.map((b, i) => (
                     <LeaderboardCard
