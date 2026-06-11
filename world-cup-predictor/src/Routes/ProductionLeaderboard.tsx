@@ -85,18 +85,6 @@ export function ProductionLeaderboard() {
     return(
         <div>
             <h1>Leaderboard</h1>
-            <div className="grid px-6 py-2 items-center font-[Poppins] text-sm text-gray-400 font-semibold"
-                 style={{ gridTemplateColumns: '2.5rem 2.5rem 1fr repeat(8, 3rem) 3.5rem 4rem 2rem' }}>
-                <span></span>
-                <span></span>
-                <span></span>
-                {['GS', 'R32', 'R16', 'QF', 'SF', 'F', '🏆', '👟'].map(label => (
-                    <span key={label} className="text-center">{label}</span>
-                ))}
-                <span className="text-center">Total</span>
-                <span className="text-center">Max</span>
-                <span></span>
-            </div>
             <div className="flex flex-col w-full">
                 {brackets.map((b, i) => (
                     <LeaderboardCard
