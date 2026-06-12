@@ -14,21 +14,21 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
             {/* Row — mobile: 5 cols, pc: all cols */}
             <div
                 onClick={onToggle}
-                className="cursor-pointer hover:bg-gray-50 transition-colors duration-150 px-4 py-3"
+                className="cursor-pointer hover:bg-gray-300 transition-colors duration-150 px-[1rem] py-[0.75rem]"
             >
                 {/* Mobile row */}
                 <div className="flex items-center gap-3 md:hidden">
-                    <span className="w-6 text-sm font-bold text-gray-600 shrink-0">{i + 1}</span>
+                    <div className="w-[1.5rem] font-[Poppins] text-sm font-bold text-black">{i + 1}</div>
                     <img
                         src={bracket_data.champion.flag}
                         alt={bracket_data.champion.name}
-                        className="rounded-sm object-cover shrink-0"
+                        className="rounded-sm object-cover"
                         style={{ width: '2rem', height: '1.4rem' }}
                     />
-                    <span className="flex-1 text-sm font-semibold text-gray-900 truncate">{bracket_data.name}</span>
-                    <span className="text-sm font-bold text-gray-900 shrink-0">0</span>
-                    <span className="text-xs text-gray-400 shrink-0">/ 436</span>
-                    <span className="text-gray-400 text-xs shrink-0">{isOpen ? '▴' : '▾'}</span>
+                    <div className="flex-1 text-sm font-semibold text-black">{bracket_data.name}</div>
+                    <div className="text-sm font-bold text-black shrink-0">0</div>
+                    <div className="text-xs text-gray-400 shrink-0">/ 436</div>
+                    <div className="text-black text-sm">{isOpen ? '▴' : '▾'}</div>
                 </div>
 
                 {/* PC row */}
@@ -36,24 +36,23 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
                     className="hidden md:grid items-center"
                     style={{ gridTemplateColumns: '2.5rem 2.5rem 1fr repeat(8, 3rem) 3.5rem 4rem 2rem' }}
                 >
-                    <span className="text-sm font-bold text-gray-600">{i + 1}</span>
+                    <span className="text-sm font-bold text-black">{i + 1}</span>
                     <img
                         src={bracket_data.champion.flag}
                         alt={bracket_data.champion.name}
                         className="rounded-sm object-cover"
                         style={{ width: '2.2rem', height: '1.5rem' }}
                     />
-                    <span className="text-sm font-semibold text-gray-900 pl-3 truncate">{bracket_data.name}</span>
+                    <span className="text-sm font-semibold text-black pl-3">{bracket_data.name}</span>
                     {['GS', 'R32', 'R16', 'QF', 'SF', 'F', '🏆', '👟'].map(label => (
                         <span key={label} className="text-center text-sm text-gray-500">0</span>
                     ))}
-                    <span className="text-center text-sm font-bold text-gray-900">0</span>
-                    <span className="text-center text-xs text-gray-400">/ 436</span>
-                    <span className="text-center text-gray-400 text-sm">{isOpen ? '▴' : '▾'}</span>
+                    <div className="text-center text-sm font-bold text-black">0</div>
+                    <div className="text-center text-xs text-gray-400">/ 436</div>
+                    <div className="text-center text-gray-400 text-sm">{isOpen ? '▴' : '▾'}</div>
                 </div>
             </div>
 
-            {/* Expanded content */}
             {isOpen && <BracketExpanded bracket_data={bracket_data} />}
         </div>
     )

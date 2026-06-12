@@ -83,9 +83,9 @@ export function ProductionLeaderboard() {
     const [openIndex, setOpenIndex] = useState<number | null>(null)
 
     return(
-        <div>
+        <div className="bg-blue-300">
             <h1 className="text-center">Leaderboard</h1>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-[25rem] md:w-[75rem] mx-auto bg-gray-100 rounded-2xl">
                 {brackets.map((b, i) => (
                     <LeaderboardCard
                         bracket_data={b}
