@@ -68,10 +68,12 @@ export function ProductionLeaderboard() {
                         data[i].semifinals, // SF
                         data[i].finals, // F
                         data[i].champion, // champion
-                        data[i].golden_boot // golden boot
+                        data[i].golden_boot, // golden boot
                     )
+                    row.score_bracket();
                     rows.push(row);
                 }
+                rows.sort((a, b) => b.total_points - a.total_points);
                 setBrackets(rows);
                 console.log(data);
             }
@@ -85,7 +87,27 @@ export function ProductionLeaderboard() {
     return(
         <div className="bg-blue-300">
             <h1 className="text-center">Leaderboard</h1>
-            <div className="flex flex-col w-[25rem] md:w-[75rem] mx-auto bg-gray-100 rounded-2xl">
+            <div className="flex flex-col items-center w-[25rem] border-b-2 border-b-gray-400 md:w-[75rem] mx-auto bg-gray-100 rounded-t-2xl">
+                {/* Mobile header */}
+                <div className="flex items-center gap-3 md:hidden w-full px-[1rem] py-[0.75rem] text-xs font-bold text-gray-400">
+                    <div className="flex-1"></div>
+                    <div className="shrink-0 w-6">Pts</div>
+                    <div className="shrink-0 w-6">Max</div>
+                    <div className="w-2"></div>
+                </div>
+
+                {/* PC header */}
+                <div className="hidden md:flex items-center gap-3 w-full px-[1rem] py-[0.75rem] text-xs font-bold text-gray-400">
+                    <div className="flex-1"></div>
+                    {['GS', 'R32', 'R16', 'QF', 'SF', '🏆', '👟'].map(label => (
+                        <span key={label} className="shrink-0 w-9">{label}</span>
+                    ))}
+                    <div className="shrink-0 w-9">Pts</div>
+                    <div className="shrink-0 w-6">Max</div>
+                    <div className="w-25"></div>
+                </div>
+            </div>
+            <div className="flex flex-col w-[25rem] md:w-[75rem] mx-auto bg-gray-100 rounded-b-2xl">
                 {brackets.map((b, i) => (
                     <LeaderboardCard
                         bracket_data={b}

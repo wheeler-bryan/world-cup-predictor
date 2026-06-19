@@ -23,6 +23,11 @@ import { InputBox } from "../Components/InputBox.tsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase.ts"
 
+//create countries
+export const countries: Country[][] = groups.map((group, upperIndex) =>
+    group.map((country, index) => new Country(country, abbreviations[upperIndex][index], flags[upperIndex][index]))
+);
+
 export function MakePicks() {
 
     const navigate = useNavigate();
@@ -34,11 +39,6 @@ export function MakePicks() {
     const [goldenBoot, setGoldenBoot] = useState("");
 
     // --- GROUP STAGES ---
-
-    //create countries
-    const countries: Country[][] = groups.map((group, upperIndex) =>
-            group.map((country, index) => new Country(country, abbreviations[upperIndex][index], flags[upperIndex][index]))
-    );
 
     //save current rankings of each country
     const [filteredCountries, setFilteredCountries] = useState<Country[][]>(groupDefault);

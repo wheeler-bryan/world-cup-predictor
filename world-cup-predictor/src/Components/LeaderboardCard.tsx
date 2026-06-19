@@ -8,6 +8,18 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
     isOpen: boolean;
     onToggle: () => void;
 }) {
+    const points_list: number[] = [
+        bracket_data.group_stage_points,
+        bracket_data.round_of_32_points,
+        bracket_data.round_of_16_points,
+        bracket_data.quarterfinals_points,
+        bracket_data.semifinals_points,
+        bracket_data.champion_points,
+        bracket_data.golden_boot_points,
+    ];
+
+    const max_curr: number = 112;
+
     return (
         <div className="w-full font-[Poppins] border-b border-gray-100">
 
@@ -26,16 +38,15 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
                         style={{ width: '2rem', height: '1.4rem' }}
                     />
                     <div className="flex-1 text-sm font-semibold text-black">{bracket_data.name}</div>
-                    <div className="text-sm font-bold text-black shrink-0">0</div>
-                    <div className="text-xs text-gray-400 shrink-0">/ 436</div>
+                    <div className="text-sm font-bold text-black shrink-0">{bracket_data.total_points}</div>
+                    <div className="text-xs text-gray-400 shrink-0">{452 - (max_curr - bracket_data.total_points)}</div>
                     <div className="text-black text-sm">{isOpen ? '▴' : '▾'}</div>
                 </div>
 
                 {/* PC row */}
                 <div
                     className="hidden md:grid items-center"
-                    style={{ gridTemplateColumns: '2.5rem 2.5rem 1fr repeat(8, 3rem) 3.5rem 4rem 2rem' }}
-                >
+                    style={{ gridTemplateColumns: '2.5rem 2.5rem 1fr repeat(8, 3rem) 3.5rem 4rem 2rem' }}>
                     <span className="text-sm font-bold text-black">{i + 1}</span>
                     <img
                         src={bracket_data.champion.flag}
@@ -44,11 +55,11 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
                         style={{ width: '2.2rem', height: '1.5rem' }}
                     />
                     <span className="text-sm font-semibold text-black pl-3">{bracket_data.name}</span>
-                    {['GS', 'R32', 'R16', 'QF', 'SF', 'F', '🏆', '👟'].map(label => (
-                        <span key={label} className="text-center text-sm text-gray-500">0</span>
+                    {['GS', 'R32', 'R16', 'QF', 'SF', '🏆', '👟'].map((label, i) => (
+                        <span key={label} className="text-center text-sm text-gray-500">{points_list[i]}</span>
                     ))}
-                    <div className="text-center text-sm font-bold text-black">0</div>
-                    <div className="text-center text-xs text-gray-400">/ 436</div>
+                    <div className="text-center text-sm font-bold text-black">{bracket_data.total_points}</div>
+                    <div className="text-center text-xs text-gray-400">{452 - (max_curr - bracket_data.total_points)}</div>
                     <div className="text-center text-gray-400 text-sm">{isOpen ? '▴' : '▾'}</div>
                 </div>
             </div>
