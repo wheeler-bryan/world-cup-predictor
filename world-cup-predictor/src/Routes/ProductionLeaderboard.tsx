@@ -75,7 +75,7 @@ export function ProductionLeaderboard() {
                 }
                 rows.sort((a, b) => b.total_points - a.total_points);
                 setBrackets(rows);
-                console.log(data);
+                // console.log(data);
             }
         }
 

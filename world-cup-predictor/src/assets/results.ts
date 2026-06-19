@@ -1,8 +1,8 @@
 import { Country } from "./countries.ts";
 import { MatchupData } from "./seeding.ts";
-// import { countries } from "../Routes/MakePicks.tsx"
+import { countries } from "../Routes/MakePicks.tsx"
 
-// const groupA: Country[] = countries[0];
+const groupA: Country[] = countries[0];
 // const groupB: Country[] = countries[1];
 // const groupC: Country[] = countries[2];
 // const groupD: Country[] = countries[3];
@@ -78,7 +78,7 @@ export class BracketRow {
 }
 
 export const groupStageResults: Country[][] = [
-    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [groupA[0], fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
@@ -124,14 +124,14 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[]): number {
 
             if (country.name == groupStageResults[i][j].name) { // if nation in correct spot, add 4 points!
                 total_points += 4
-            } else if (top_2.some(c => c.name === groupStageResults[i][1 - j].name)) { // nation in top 2 but wrong spot
+            } else if (top_2[1 - j].name === groupStageResults[i][j].name) { // nation in top 2 but wrong spot
+                console.log(groupStageResults[i][1 - j].name + " WR")
                 total_points += 2;
             } else if (advancingThird.some(c => c.name === country.name)) {
                 total_points += 2;
             }
         }
     }
-
     return(total_points + score_third_place(ro32));
 }
 

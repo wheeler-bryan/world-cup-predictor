@@ -3,7 +3,7 @@ import "../App.css"
 
 export function PointsPanel({ bracket_data }: { bracket_data: BracketRow }) {
     const rounds = [
-        { label: 'Group Stage', key: 'GS', pts: bracket_data.group_stage_points, max: 112, curr_max: 0 },
+        { label: 'Group Stage', key: 'GS', pts: bracket_data.group_stage_points, max: 112, curr_max: 4 },
         { label: 'Round of 32',  key: 'R32', pts: bracket_data.round_of_32_points, max: 80, curr_max: 0 },
         { label: 'Round of 16', key: 'R16', pts: bracket_data.round_of_16_points, max: 80, curr_max: 0 },
         { label: 'Quarter Finals', key: 'QF', pts: bracket_data.quarterfinals_points, max: 60, curr_max: 0 },
