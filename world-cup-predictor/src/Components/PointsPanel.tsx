@@ -22,7 +22,7 @@ export function PointsPanel({ bracket_data }: { bracket_data: BracketRow }) {
                             {/* lost points — red from the right */}
                             <div
                                 className="absolute right-0 top-0 h-2 bg-red-300 rounded-full transition-all duration-300"
-                                style={{ width: `${(curr_max - pts / max) * 100}%` }}
+                                style={{ width: `${((curr_max - pts) / max) * 100}%` }}
                             />
                             {/* earned points — green from the left */}
                             <div
