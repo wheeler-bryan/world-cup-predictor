@@ -78,22 +78,22 @@ export class BracketRow {
 }
 
 export const groupStageResults: Country[][] = [
-    [groupA[1], groupA[0], groupA[3], groupA[2]],
-    [groupB[1], groupB[0], groupB[3], groupB[2]],
-    [groupC[0], groupC[1], groupC[2], groupC[3]],
-    [groupD[0], groupD[3], groupD[2], groupD[1]],
-    [groupE[0], groupE[1], groupE[2], groupE[3]],
-    [groupF[0], groupF[1], groupF[3], groupF[2]],
-    [groupG[2], groupG[0], groupG[1], groupG[3]],
-    [groupH[0], groupH[1], groupH[2], groupH[3]],
-    [groupI[0], groupI[2], groupI[1], groupI[3]],
-    [groupJ[0], groupJ[2], groupJ[1], groupJ[3]],
-    [groupK[0], groupK[1], groupK[2], groupK[3]],
-    [fakeCountry, groupL[0], groupL[2], fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
 ];
 
 export const advancingThird: Country[] = [
-    groupC[2], groupG[1], groupA[3], groupB[3], groupE[2], groupI[1], groupJ[1], groupK[2]
+    fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 function score_third_place(ro32: MatchupData[]): number {
@@ -136,7 +136,7 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[]): number {
 }
 
 const winners_round_of_32: Country[] = [
-    groupE[0], groupI[0], groupB[0], groupF[0], groupC[0], groupE[1], groupE[2], groupL[1], groupK[1], groupH[0], groupD[0], groupA[3], groupJ[0], groupD[3], groupB[1], groupK[0]
+    fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 function score_round_of_32(ro16: MatchupData[]): number {
@@ -151,7 +151,7 @@ function score_round_of_32(ro16: MatchupData[]): number {
 }
 
 const winners_round_of_16: Country[] = [
-    groupI[0], groupF[0], groupC[0], groupE[2], groupK[1], groupD[0], groupJ[0], groupK[0]
+    fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 function score_round_of_16(qf: MatchupData[]): number {
@@ -166,7 +166,7 @@ function score_round_of_16(qf: MatchupData[]): number {
 }
 
 const winners_qf: Country[] = [
-    groupI[0], groupC[0], groupD[0], groupK[0]
+    fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 function score_quarterfinals(sf: MatchupData[]): number {
@@ -181,7 +181,7 @@ function score_quarterfinals(sf: MatchupData[]): number {
 }
 
 const winners_sf: Country[] = [
-    groupI[0], groupK[0]
+    fakeCountry, fakeCountry
 ]
 
 function score_semifinals(f: MatchupData): number {
@@ -205,7 +205,7 @@ function score_champion(c: Country): number {
     return(total_score);
 }
 
-const golden_boot: string = "Kylian Mbappe";
+const golden_boot: string = "Bryan Wheeler";
 
 function score_golden_boot(gb: string): number {
     let total_score: number = 0;

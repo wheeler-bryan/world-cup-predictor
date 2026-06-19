@@ -90,14 +90,20 @@ export function ProductionLeaderboard() {
             <div className="flex flex-col items-center w-[25rem] border-b-2 border-b-gray-400 md:w-[75rem] mx-auto bg-gray-100 rounded-t-2xl">
                 {/* Mobile header */}
                 <div className="flex items-center gap-3 md:hidden w-full px-[1rem] py-[0.75rem] text-xs font-bold text-gray-400">
+                    <button className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold px-3 py-1 rounded-full">
+                        Points Legend
+                    </button>
                     <div className="flex-1"></div>
                     <div className="shrink-0 w-6">Pts</div>
                     <div className="shrink-0 w-6">Max</div>
-                    <div className="w-2"></div>
+                    <div className="w-0"></div>
                 </div>
 
                 {/* PC header */}
                 <div className="hidden md:flex items-center gap-3 w-full px-[1rem] py-[0.75rem] text-xs font-bold text-gray-400">
+                    <button className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold px-3 py-1 rounded-full">
+                        Points Legend
+                    </button>
                     <div className="flex-1"></div>
                     {['GS', 'R32', 'R16', 'QF', 'SF', '🏆', '👟'].map(label => (
                         <span key={label} className="shrink-0 w-9">{label}</span>
