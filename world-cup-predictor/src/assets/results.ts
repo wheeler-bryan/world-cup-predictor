@@ -1,19 +1,19 @@
 import { Country } from "./countries.ts";
 import { MatchupData } from "./seeding.ts";
-import { countries } from "../Routes/MakePicks.tsx"
+// import { countries } from "../Routes/MakePicks.tsx"
 
-const groupA: Country[] = countries[0];
-const groupB: Country[] = countries[1];
-const groupC: Country[] = countries[2];
-const groupD: Country[] = countries[3];
-const groupE: Country[] = countries[4];
-const groupF: Country[] = countries[5];
-const groupG: Country[] = countries[6];
-const groupH: Country[] = countries[7];
-const groupI: Country[] = countries[8];
-const groupJ: Country[] = countries[9];
-const groupK: Country[] = countries[10];
-const groupL: Country[] = countries[11];
+// const groupA: Country[] = countries[0];
+// const groupB: Country[] = countries[1];
+// const groupC: Country[] = countries[2];
+// const groupD: Country[] = countries[3];
+// const groupE: Country[] = countries[4];
+// const groupF: Country[] = countries[5];
+// const groupG: Country[] = countries[6];
+// const groupH: Country[] = countries[7];
+// const groupI: Country[] = countries[8];
+// const groupJ: Country[] = countries[9];
+// const groupK: Country[] = countries[10];
+// const groupL: Country[] = countries[11];
 const fakeCountry: Country = new Country("Fake ahh", "B3D", "Peter");
 
 export class BracketRow {
