@@ -91,7 +91,7 @@ export function ProductionLeaderboard() {
                 {/* Mobile header */}
                 <div className="flex items-center gap-3 md:hidden w-full px-[1rem] py-[0.75rem] text-xs font-bold text-gray-400">
                     <button className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold px-3 py-1 rounded-full">
-                        Points Legend
+
                     </button>
                     <div className="flex-1"></div>
                     <div className="shrink-0 w-6">Pts</div>
@@ -102,7 +102,7 @@ export function ProductionLeaderboard() {
                 {/* PC header */}
                 <div className="hidden md:flex items-center gap-3 w-full px-[1rem] py-[0.75rem] text-xs font-bold text-gray-400">
                     <button className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold px-3 py-1 rounded-full">
-                        Points Legend
+
                     </button>
                     <div className="flex-1"></div>
                     {['GS', 'R32', 'R16', 'QF', 'SF', '🏆', '👟'].map(label => (
