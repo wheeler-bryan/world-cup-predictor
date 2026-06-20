@@ -5,7 +5,7 @@ import { countries } from "../Routes/MakePicks.tsx"
 const groupA: Country[] = countries[0];
 // const groupB: Country[] = countries[1];
 // const groupC: Country[] = countries[2];
-// const groupD: Country[] = countries[3];
+const groupD: Country[] = countries[3];
 // const groupE: Country[] = countries[4];
 // const groupF: Country[] = countries[5];
 // const groupG: Country[] = countries[6];
@@ -81,7 +81,7 @@ export const groupStageResults: Country[][] = [
     [groupA[0], fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
-    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [groupD[0], fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],

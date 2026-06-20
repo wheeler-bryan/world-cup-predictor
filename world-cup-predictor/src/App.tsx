@@ -10,7 +10,7 @@ function App() {
         <BrowserRouter>
           <Routes>
               <Route path="/" element={<ProductionLeaderboard />} />
-              <Route path="/shevlintax" element={<MakePicks />} />
+              <Route path="/hiddengameelement" element={<MakePicks />} />
           </Routes>
         </BrowserRouter>
     </>

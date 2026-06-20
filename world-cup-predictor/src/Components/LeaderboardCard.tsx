@@ -18,7 +18,7 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
         bracket_data.golden_boot_points,
     ];
 
-    const max_curr: number = 4;
+    const max_curr: number = 8;
 
     return (
         <div className="w-full font-[Poppins] border-b border-gray-100">
