@@ -7,11 +7,14 @@ import {Group, MatchupData, runner_up, third_place, winner} from "../assets/seed
 import type {Country} from "../assets/countries.ts";
 import thirdPlaceTable from "../assets/third_place_table.json"
 import {LeaderboardCard} from "../Components/LeaderboardCard.tsx";
+import {ScoringButton} from "../Components/ScoringButton.tsx";
+import {ScoringRules} from "../Components/ScoringRules.tsx";
 
 export function ProductionLeaderboard() {
 
     const navigate = useNavigate();
-    const [brackets, setBrackets] = useState<BracketRow[]>([])
+    const [brackets, setBrackets] = useState<BracketRow[]>([]);
+    const [showScoring, setShowScoring] = useState(false);
 
     useEffect(() => {
         async function fetchBrackets() {
@@ -90,9 +93,7 @@ export function ProductionLeaderboard() {
             <div className="flex flex-col items-center w-[25rem] border-b-2 border-b-gray-400 md:w-[75rem] mx-auto bg-gray-100 rounded-t-2xl">
                 {/* Mobile header */}
                 <div className="flex items-center gap-3 md:hidden w-full px-[1rem] py-[0.75rem] text-xs font-bold text-gray-400">
-                    <button className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold px-3 py-1 rounded-full">
-
-                    </button>
+                    <ScoringButton setShowScoring={setShowScoring} />
                     <div className="flex-1"></div>
                     <div className="shrink-0 w-6">Pts</div>
                     <div className="shrink-0 w-6">Max</div>
@@ -101,9 +102,7 @@ export function ProductionLeaderboard() {
 
                 {/* PC header */}
                 <div className="hidden md:flex items-center gap-3 w-full px-[1rem] py-[0.75rem] text-xs font-bold text-gray-400">
-                    <button className="text-xs bg-gray-200 hover:bg-gray-300 text-gray-500 font-semibold px-3 py-1 rounded-full">
-
-                    </button>
+                    <ScoringButton setShowScoring={setShowScoring} />
                     <div className="flex-1"></div>
                     {['GS', 'R32', 'R16', 'QF', 'SF', '🏆', '👟'].map(label => (
                         <span key={label} className="shrink-0 w-9">{label}</span>
@@ -124,6 +123,7 @@ export function ProductionLeaderboard() {
                     />
                 ))}
             </div>
+            {showScoring && <ScoringRules onClose={() => setShowScoring(false)} />}
         </div>
     )
 }
