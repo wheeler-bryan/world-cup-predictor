@@ -9,16 +9,14 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
     onToggle: () => void;
 }) {
     const points_list: number[] = [
-        bracket_data.group_stage_points,
-        bracket_data.round_of_32_points,
-        bracket_data.round_of_16_points,
-        bracket_data.quarterfinals_points,
-        bracket_data.semifinals_points,
-        bracket_data.champion_points,
-        bracket_data.golden_boot_points,
+        bracket_data.group_stage_points[0],
+        bracket_data.round_of_32_points[0],
+        bracket_data.round_of_16_points[0],
+        bracket_data.quarterfinals_points[0],
+        bracket_data.semifinals_points[0],
+        bracket_data.champion_points[0],
+        bracket_data.golden_boot_points[0],
     ];
-
-    const max_curr: number = 8;
 
     return (
         <div className="w-full font-[Poppins] border-b border-gray-100">
@@ -39,7 +37,7 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
                     />
                     <div className="flex-1 text-sm font-semibold text-black">{bracket_data.name}</div>
                     <div className="text-sm font-bold text-black shrink-0">{bracket_data.total_points}</div>
-                    <div className="text-xs text-gray-400 shrink-0">{452 - (max_curr - bracket_data.total_points)}</div>
+                    <div className="text-xs text-gray-400 shrink-0">{bracket_data.max_points}</div>
                     <div className="text-black text-sm">{isOpen ? '▴' : '▾'}</div>
                 </div>
 
@@ -59,7 +57,7 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
                         <span key={label} className="text-center text-sm text-gray-500">{points_list[i]}</span>
                     ))}
                     <div className="text-center text-sm font-bold text-black">{bracket_data.total_points}</div>
-                    <div className="text-center text-xs text-gray-400">{452 - (max_curr - bracket_data.total_points)}</div>
+                    <div className="text-center text-xs text-gray-400">{bracket_data.max_points}</div>
                     <div className="text-center text-gray-400 text-sm">{isOpen ? '▴' : '▾'}</div>
                 </div>
             </div>

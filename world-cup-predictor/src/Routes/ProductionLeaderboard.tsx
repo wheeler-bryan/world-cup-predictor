@@ -76,7 +76,7 @@ export function ProductionLeaderboard() {
                     row.score_bracket();
                     rows.push(row);
                 }
-                rows.sort((a, b) => b.total_points - a.total_points);
+                rows.sort((a, b) => b.total_points - a.total_points || b.max_points - a.max_points);
                 setBrackets(rows);
                 // console.log(data);
             }
