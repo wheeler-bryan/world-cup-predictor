@@ -3,7 +3,7 @@ import { MatchupData } from "./seeding.ts";
 import { countries } from "../Routes/MakePicks.tsx"
 
 const groupA: Country[] = countries[0];
-// const groupB: Country[] = countries[1];
+const groupB: Country[] = countries[1];
 const groupC: Country[] = countries[2];
 const groupD: Country[] = countries[3];
 const groupE: Country[] = countries[4];
@@ -84,7 +84,7 @@ export class BracketRow {
 
 const groupStageResults: Country[][] = [
     [groupA[0], fakeCountry, fakeCountry, fakeCountry],
-    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [groupB[1], groupB[0], groupB[3], groupB[2]],
     [fakeCountry, fakeCountry, fakeCountry, groupC[3]],
     [groupD[0], fakeCountry, fakeCountry, groupD[3]],
     [groupE[0], fakeCountry, fakeCountry, fakeCountry],
