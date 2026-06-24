@@ -11,9 +11,9 @@ const groupF: Country[] = countries[5];
 // const groupG: Country[] = countries[6];
 // const groupH: Country[] = countries[7];
 // const groupI: Country[] = countries[8];
-// const groupJ: Country[] = countries[9];
+const groupJ: Country[] = countries[9];
 // const groupK: Country[] = countries[10];
-// const groupL: Country[] = countries[11];
+const groupL: Country[] = countries[11];
 const fakeCountry: Country = new Country("placeholder", "B3D", "Peter");
 
 export class BracketRow {
@@ -92,9 +92,9 @@ const groupStageResults: Country[][] = [
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [groupJ[0], fakeCountry, fakeCountry, groupJ[3]],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
-    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
-    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [fakeCountry, fakeCountry, fakeCountry, groupL[2]],
 ];
 
 const advancingThird: Country[] = [
