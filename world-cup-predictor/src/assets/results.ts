@@ -83,7 +83,7 @@ export class BracketRow {
 }
 
 const groupStageResults: Country[][] = [
-    [groupA[0], fakeCountry, fakeCountry, fakeCountry],
+    [groupA[0], groupA[2], groupA[1], groupA[3]],
     [groupB[1], groupB[0], groupB[3], groupB[2]],
     [fakeCountry, fakeCountry, fakeCountry, groupC[3]],
     [groupD[0], fakeCountry, fakeCountry, groupD[3]],
@@ -98,7 +98,7 @@ const groupStageResults: Country[][] = [
 ];
 
 const advancingThird: Country[] = [
-    fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupB[3], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 const eliminated = [groupStageResults.map(c => c[3]), [fakeCountry, fakeCountry, fakeCountry, fakeCountry]].flat();
