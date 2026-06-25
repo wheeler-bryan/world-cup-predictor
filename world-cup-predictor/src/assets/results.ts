@@ -87,7 +87,7 @@ const groupStageResults: Country[][] = [
     [groupB[1], groupB[0], groupB[3], groupB[2]],
     [fakeCountry, fakeCountry, fakeCountry, groupC[3]],
     [groupD[0], fakeCountry, fakeCountry, groupD[3]],
-    [groupE[0], fakeCountry, fakeCountry, fakeCountry],
+    [groupE[0], groupE[2], groupE[1], groupE[3]],
     [fakeCountry, fakeCountry, fakeCountry, groupF[2]],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
@@ -98,7 +98,7 @@ const groupStageResults: Country[][] = [
 ];
 
 const advancingThird: Country[] = [
-    groupB[3], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupB[3], groupE[1], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 const eliminated = [groupStageResults.map(c => c[3]), [fakeCountry, fakeCountry, fakeCountry, fakeCountry]].flat();
