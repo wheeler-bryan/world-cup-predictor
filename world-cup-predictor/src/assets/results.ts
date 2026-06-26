@@ -10,7 +10,7 @@ const groupE: Country[] = countries[4];
 const groupF: Country[] = countries[5];
 // const groupG: Country[] = countries[6];
 // const groupH: Country[] = countries[7];
-// const groupI: Country[] = countries[8];
+const groupI: Country[] = countries[8];
 const groupJ: Country[] = countries[9];
 // const groupK: Country[] = countries[10];
 const groupL: Country[] = countries[11];
@@ -91,7 +91,7 @@ const groupStageResults: Country[][] = [
     [groupF[0], groupF[1], groupF[3], groupF[2]],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
-    [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
+    [groupI[0], groupI[2], groupI[1], groupI[3]],
     [groupJ[0], fakeCountry, fakeCountry, groupJ[3]],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
     [fakeCountry, fakeCountry, fakeCountry, groupL[2]],
