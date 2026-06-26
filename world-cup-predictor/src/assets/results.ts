@@ -85,8 +85,8 @@ export class BracketRow {
 const groupStageResults: Country[][] = [
     [groupA[0], groupA[2], groupA[1], groupA[3]],
     [groupB[1], groupB[0], groupB[3], groupB[2]],
-    [fakeCountry, fakeCountry, fakeCountry, groupC[3]],
-    [groupD[0], fakeCountry, fakeCountry, groupD[3]],
+    [groupC[0], groupC[1], groupC[2], groupC[3]],
+    [groupD[0], groupD[2], groupD[1], groupD[3]],
     [groupE[0], groupE[2], groupE[1], groupE[3]],
     [groupF[0], groupF[1], groupF[3], groupF[2]],
     [fakeCountry, fakeCountry, fakeCountry, fakeCountry],
