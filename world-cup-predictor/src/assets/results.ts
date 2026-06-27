@@ -35,6 +35,7 @@ export class BracketRow {
     golden_boot_points: [number, number];
     total_points: number;
     max_points: number;
+    point_details: Map<string, number>;
 
     constructor(
         name: string,
@@ -65,6 +66,7 @@ export class BracketRow {
         this.golden_boot_points = [0,0];
         this.total_points = 0;
         this.max_points = 452;
+        this.point_details = new Map<string, number>();
     }
 
     score_bracket(): void {
@@ -126,7 +128,7 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string): 
             } else if (third_place_countries.some(c => c.name === country.name)) { // nation advancing as a third when projected higher
                 total_points += 2;
                 max_point_deduction += 2
-                if (name === "Bryan") {console.log(`${country.name} +2, right nation but third`)}
+                if (name === "Bryan") {console.log(`${country.name} +2, -2, right nation but third`)}
             }
         }
     }
@@ -137,7 +139,7 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string): 
         if (gs.map(c => [c[0], c[1]]).flat().some(c => c.name === country.name)) { // nation predicted to finish top two finished third, but advance
             total_points += 2;
             max_point_deduction += 2;
-            if (name === "Bryan") {console.log(`${country.name} +2, third place did better`)}
+            if (name === "Bryan") {console.log(`${country.name} +2, -2, predicted top two was third`)}
         } else if (third_place_countries.some(c => c.name === country.name)) { //nation correctly predicted as third place
             total_points += 2;
             if (name === "Bryan") {console.log(`${country.name} +2, right third place`)}
