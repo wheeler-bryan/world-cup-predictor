@@ -98,7 +98,7 @@ const groupStageResults: Country[][] = [
 ];
 
 const advancingThird: Country[] = [
-    groupB[3], groupE[1], groupF[3], groupD[1], fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupB[3], groupE[1], groupF[3], groupD[1], groupI[1], fakeCountry, fakeCountry, fakeCountry
 ]
 
 const eliminated = [groupStageResults.map(c => c[3]), [groupH[1], fakeCountry, fakeCountry, fakeCountry]].flat();
