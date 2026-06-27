@@ -24,7 +24,7 @@ export function ProductionLeaderboard() {
                 .order('code', { ascending: true })
 
             if (error) {
-                navigate('/bracket_submitted');
+                navigate('/');
             } else {
                 const rows: BracketRow[] = [];
 
