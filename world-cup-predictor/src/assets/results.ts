@@ -84,7 +84,7 @@ export class BracketRow {
     }
 }
 
-const groupStageResults: Country[][] = [
+export const groupStageResults: Country[][] = [
     [groupA[0], groupA[2], groupA[1], groupA[3]],
     [groupB[1], groupB[0], groupB[3], groupB[2]],
     [groupC[0], groupC[1], groupC[2], groupC[3]],
@@ -99,11 +99,11 @@ const groupStageResults: Country[][] = [
     [groupL[0], groupL[1], groupL[3], groupL[2]],
 ];
 
-const advancingThird: Country[] = [
+export const advancingThird: Country[] = [
     groupB[3], groupE[1], groupF[3], groupD[1], groupI[1], groupL[3], groupK[3], groupJ[2]
 ]
 
-const eliminated = [groupStageResults.map(c => c[3]), [groupH[1], groupC[2], groupA[1], groupG[1]]].flat();
+export const eliminated = [groupStageResults.map(c => c[3]), [groupH[1], groupC[2], groupA[1], groupG[1]]].flat();
 
 function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string): [number, number] {
     let total_points: number = 0;
@@ -161,11 +161,11 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string): 
 }
 
 const winners_round_of_32: Country[] = [
-    fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupB[0], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 const losers_round_of_32: Country[] = [
-    fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupA[2], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 function score_round_of_32(ro16: MatchupData[]): [number, number] {
