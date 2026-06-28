@@ -94,16 +94,16 @@ const groupStageResults: Country[][] = [
     [groupG[0], groupG[2], groupG[1], groupG[3]],
     [groupH[0], groupH[3], groupH[1], groupH[2]],
     [groupI[0], groupI[2], groupI[1], groupI[3]],
-    [groupJ[0], fakeCountry, fakeCountry, groupJ[3]],
+    [groupJ[0], groupJ[1], groupJ[2], groupJ[3]],
     [groupK[1], groupK[0], groupK[3], groupK[2]],
     [groupL[0], groupL[1], groupL[3], groupL[2]],
 ];
 
 const advancingThird: Country[] = [
-    groupB[3], groupE[1], groupF[3], groupD[1], groupI[1], groupL[3], groupK[3], fakeCountry
+    groupB[3], groupE[1], groupF[3], groupD[1], groupI[1], groupL[3], groupK[3], groupJ[2]
 ]
 
-const eliminated = [groupStageResults.map(c => c[3]), [groupH[1], groupC[2], groupA[1], fakeCountry]].flat();
+const eliminated = [groupStageResults.map(c => c[3]), [groupH[1], groupC[2], groupA[1], groupG[1]]].flat();
 
 function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string): [number, number] {
     let total_points: number = 0;
