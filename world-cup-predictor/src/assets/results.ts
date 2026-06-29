@@ -175,11 +175,11 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string, d
 }
 
 const winners_round_of_32: Country[] = [
-    groupB[0], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupB[0], groupC[0], groupD[1], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 const losers_round_of_32: Country[] = [
-    groupA[2], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupA[2], groupF[1], groupE[0], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 function score_round_of_32(ro16: MatchupData[]): [number, number] {
