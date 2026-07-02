@@ -19,7 +19,7 @@ export function BracketPanel({ bracket_data }: { bracket_data: BracketRow }) {
                             const m = matchups.find(m => m.match_number === mn)!;
                             return(
                                 <div key={label + m.home!.name + m.away!.name} className="flex flex-col gap-0.5 bg-gray-50 rounded-lg p-1.5 w-20">
-                                    <div className="flex items-center gap-1">
+                                    <div className="flex items-center gap-1 rounded-xl pl-1.5">
                                         {m.home
                                             ? <><img src={m.home.flag} alt={m.home.abbreviation}
                                                      className="rounded-sm object-cover shrink-0"
@@ -29,7 +29,7 @@ export function BracketPanel({ bracket_data }: { bracket_data: BracketRow }) {
                                         }
                                     </div>
                                     <div className="border-t border-gray-200 my-0.5" />
-                                    <div className="flex items-center gap-1">
+                                    <div className="flex items-center gap-1 rounded-xl pl-1.5">
                                         {m.away
                                             ? <><img src={m.away.flag} alt={m.away.abbreviation}
                                                      className="rounded-sm object-cover shrink-0"
