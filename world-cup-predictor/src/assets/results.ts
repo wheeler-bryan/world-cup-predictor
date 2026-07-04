@@ -175,11 +175,11 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string, d
 }
 
 const winners_round_of_32: Country[] = [
-    groupB[0], groupC[0], groupD[1], groupC[1], groupI[2], groupI[0], groupA[0], groupG[0], groupL[0], groupD[0], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupB[0], groupC[0], groupD[1], groupC[1], groupI[2], groupI[0], groupA[0], groupG[0], groupL[0], groupD[0], groupH[0], groupK[0], groupB[1], groupD[1], groupJ[0], groupK[1]
 ]
 
 const losers_round_of_32: Country[] = [
-    groupA[2], groupF[1], groupE[0], groupF[0], groupE[2], groupF[3], groupE[1], groupI[1], groupK[3], groupB[3], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupA[2], groupF[1], groupE[0], groupF[0], groupE[2], groupF[3], groupE[1], groupI[1], groupK[3], groupB[3], groupJ[1], groupL[1], groupJ[2], groupG[2], groupH[3], groupL[3]
 ]
 
 function score_round_of_32(ro16: MatchupData[]): [number, number] {
@@ -188,6 +188,8 @@ function score_round_of_32(ro16: MatchupData[]): [number, number] {
     let max_point_deduction: number = 0;
 
     for (const country of winners_round_of_32) {
+        console.clear();
+        console.log(country.name);
         if (country.name === "placeholder") continue; // if not implemented dont try
 
         if (selectedCountries.some(c => c.name === country.name)) { // if your nation correctly moves on, you get points
@@ -196,6 +198,7 @@ function score_round_of_32(ro16: MatchupData[]): [number, number] {
     }
 
     for (const country of losers_round_of_32) {
+        console.log(country.name);
         if (country.name === "placeholder") continue;
 
         if (selectedCountries.some(c => c.name === country.name)) { // if your nation doesn't move on, you get deducted points
@@ -217,10 +220,10 @@ function score_round_of_32(ro16: MatchupData[]): [number, number] {
 
 const eliminated_ro32: Country[] = [eliminated, losers_round_of_32].flat();
 const winners_round_of_16: Country[] = [
-    fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupC[1], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 const losers_round_of_16: Country[] = [
-    fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
+    groupB[0], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
 function score_round_of_16(qf: MatchupData[]): [number, number] {
