@@ -175,11 +175,11 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string, d
 }
 
 const winners_round_of_32: Country[] = [
-    groupB[0], groupC[0], groupD[1], groupC[1], groupI[2], groupI[0], groupA[0], groupG[0], groupL[0], groupD[0], groupH[0], groupK[0], groupB[1], groupD[2], groupJ[0], groupK[1]
+    groupB[0], groupC[0], groupD[1], groupC[1], groupI[2], groupI[0], groupA[0], groupG[0], groupL[0], groupD[0], groupH[0], groupK[0], groupB[1], groupG[2], groupJ[0], groupK[1]
 ]
 
 const losers_round_of_32: Country[] = [
-    groupA[2], groupF[1], groupE[0], groupF[0], groupE[2], groupF[3], groupE[1], groupI[1], groupK[3], groupB[3], groupJ[1], groupL[1], groupJ[2], groupG[2], groupH[3], groupL[3]
+    groupA[2], groupF[1], groupE[0], groupF[0], groupE[2], groupF[3], groupE[1], groupI[1], groupK[3], groupB[3], groupJ[1], groupL[1], groupJ[2], groupD[2], groupH[3], groupL[3]
 ]
 
 function score_round_of_32(ro16: MatchupData[], name: string): [number, number] {
@@ -192,7 +192,7 @@ function score_round_of_32(ro16: MatchupData[], name: string): [number, number] 
 
         if (selectedCountries.some(c => c.name === country.name)) { // if your nation correctly moves on, you get points
             total_score += 5;
-            if (name === "HotDogCathy") {console.log( country.name + " +5" )}
+            if (name === "Bryan") {console.log( country.name + " +5" )}
         }
     }
 
@@ -201,7 +201,7 @@ function score_round_of_32(ro16: MatchupData[], name: string): [number, number] 
 
         if (selectedCountries.some(c => c.name === country.name)) { // if your nation doesn't move on, you get deducted points
             max_point_deduction += 5;
-            if (name === "HotDogCathy") {console.log( country.name + " -5" )}
+            if (name === "Bryan") {console.log( country.name + " -5" )}
         }
     }
 
