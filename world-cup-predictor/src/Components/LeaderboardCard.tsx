@@ -1,6 +1,7 @@
 import "../App.css"
 import type { BracketRow } from "../assets/results.ts";
 import { BracketExpanded } from "./BracketExpanded.tsx";
+import { runner_up, eliminated_sf } from "../assets/results.ts";
 
 export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
     bracket_data: BracketRow;
@@ -18,6 +19,8 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
         bracket_data.golden_boot_points[0],
     ];
 
+    const opacity: number = [eliminated_sf, runner_up].flat().some(c => c.name === bracket_data.champion.name) ? 0.5 : 1;
+
     return (
         <div className="w-full font-[Poppins] border-b border-gray-100">
 
@@ -33,7 +36,7 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
                         src={bracket_data.champion.flag}
                         alt={bracket_data.champion.name}
                         className="rounded-sm object-cover"
-                        style={{ width: '2rem', height: '1.4rem' }}
+                        style={{ width: '2rem', height: '1.4rem', filter: opacity < 1 ? 'brightness(0.5) grayscale(0.5)' : 'none' }}
                     />
                     <div className="flex-1 text-sm font-semibold text-black">{bracket_data.name}</div>
                     <div className="text-sm font-bold text-black shrink-0">{bracket_data.total_points}</div>
@@ -50,7 +53,7 @@ export function LeaderboardCard({ bracket_data, i, isOpen, onToggle }: {
                         src={bracket_data.champion.flag}
                         alt={bracket_data.champion.name}
                         className="rounded-sm object-cover"
-                        style={{ width: '2.2rem', height: '1.5rem' }}
+                        style={{ width: '2.2rem', height: '1.5rem', filter: opacity < 1 ? 'brightness(0.5) grayscale(0.5)' : 'none' }}
                     />
                     <span className="text-sm font-semibold text-black pl-3">{bracket_data.name}</span>
                     {['GS', 'R32', 'R16', 'QF', 'SF', '🏆', '👟'].map((label, i) => (

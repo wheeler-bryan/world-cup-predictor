@@ -1,4 +1,5 @@
 import type {BracketRow} from "../assets/results.ts";
+import {BracketHalf} from "./BracketHalf.tsx";
 
 export function BracketPanel({ bracket_data }: { bracket_data: BracketRow }) {
     const rounds = [
@@ -19,25 +20,9 @@ export function BracketPanel({ bracket_data }: { bracket_data: BracketRow }) {
                             const m = matchups.find(m => m.match_number === mn)!;
                             return(
                                 <div key={label + m.home!.name + m.away!.name} className="flex flex-col gap-0.5 bg-gray-50 rounded-lg p-1.5 w-20">
-                                    <div className="flex items-center gap-1 rounded-xl pl-1.5">
-                                        {m.home
-                                            ? <><img src={m.home.flag} alt={m.home.abbreviation}
-                                                     className="rounded-sm object-cover shrink-0"
-                                                     style={{ width: '1rem', height: '0.7rem' }} />
-                                                <span className="text-xs font-mono text-gray-700 truncate">{m.home.abbreviation}</span></>
-                                            : <span className="text-xs text-gray-300 italic">TBD</span>
-                                        }
-                                    </div>
+                                    <BracketHalf country={m.home!} label={label} details={bracket_data.point_details.get(m.home!.name)!} />
                                     <div className="border-t border-gray-200 my-0.5" />
-                                    <div className="flex items-center gap-1 rounded-xl pl-1.5">
-                                        {m.away
-                                            ? <><img src={m.away.flag} alt={m.away.abbreviation}
-                                                     className="rounded-sm object-cover shrink-0"
-                                                     style={{ width: '1rem', height: '0.7rem' }} />
-                                                <span className="text-xs font-mono text-gray-700 truncate">{m.away.abbreviation}</span></>
-                                            : <span className="text-xs text-gray-300 italic">TBD</span>
-                                        }
-                                    </div>
+                                    <BracketHalf country={m.away!} label={label} details={bracket_data.point_details.get(m.away!.name)!} />
                                 </div>
                             );
                         })}

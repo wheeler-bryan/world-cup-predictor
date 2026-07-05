@@ -174,11 +174,11 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string, d
     return([total_points, max_point_deduction]);
 }
 
-const winners_round_of_32: Country[] = [
+export const winners_round_of_32: Country[] = [
     groupB[0], groupC[0], groupD[1], groupC[1], groupI[2], groupI[0], groupA[0], groupG[0], groupL[0], groupD[0], groupH[0], groupK[0], groupB[1], groupG[2], groupJ[0], groupK[1]
 ]
 
-const losers_round_of_32: Country[] = [
+export const losers_round_of_32: Country[] = [
     groupA[2], groupF[1], groupE[0], groupF[0], groupE[2], groupF[3], groupE[1], groupI[1], groupK[3], groupB[3], groupJ[1], groupL[1], groupJ[2], groupD[2], groupH[3], groupL[3]
 ]
 
@@ -217,11 +217,11 @@ function score_round_of_32(ro16: MatchupData[], name: string): [number, number] 
     return([total_score, max_point_deduction]);
 }
 
-const eliminated_ro32: Country[] = [eliminated, losers_round_of_32].flat();
-const winners_round_of_16: Country[] = [
+export const eliminated_ro32: Country[] = [eliminated, losers_round_of_32].flat();
+export const winners_round_of_16: Country[] = [
     groupC[1], groupI[0], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
-const losers_round_of_16: Country[] = [
+export const losers_round_of_16: Country[] = [
     groupB[0], groupD[1], fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
 
@@ -257,13 +257,13 @@ function score_round_of_16(qf: MatchupData[]): [number, number] {
     return[total_score, max_point_deduction];
 }
 
-const winners_qf: Country[] = [
+export const winners_qf: Country[] = [
     fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
-const losers_qf: Country[] = [
+export const losers_qf: Country[] = [
     fakeCountry, fakeCountry, fakeCountry, fakeCountry
 ]
-const eliminated_ro16: Country[] = [eliminated_ro32, losers_round_of_16].flat();
+export const eliminated_ro16: Country[] = [eliminated_ro32, losers_round_of_16].flat();
 
 function score_quarterfinals(sf: MatchupData[]): [number, number] {
     const selectedCountries: Country[] = sf.map(m => [m.home!, m.away!]).flat();
@@ -296,15 +296,15 @@ function score_quarterfinals(sf: MatchupData[]): [number, number] {
     return([total_score, max_point_deduction]);
 }
 
-const winners_sf: Country[] = [
+export const winners_sf: Country[] = [
     fakeCountry, fakeCountry
 ]
 
-const losers_sf: Country[] = [
+export const losers_sf: Country[] = [
     fakeCountry, fakeCountry
 ]
 
-const eliminated_qf: Country[] = [eliminated_ro32, losers_qf].flat();
+export const eliminated_qf: Country[] = [eliminated_ro32, losers_qf].flat();
 
 function score_semifinals(f: MatchupData): [number, number] {
     const selectedCountries: Country[] = [f.home!, f.away!]
@@ -337,9 +337,9 @@ function score_semifinals(f: MatchupData): [number, number] {
     return([total_score, max_point_deduction]);
 }
 
-const champion: Country = fakeCountry;
-const runner_up: Country = fakeCountry;
-const eliminated_sf: Country[] = [eliminated_ro32, losers_sf].flat();
+export const champion: Country = fakeCountry;
+export const runner_up: Country = fakeCountry;
+export const eliminated_sf: Country[] = [eliminated_ro32, losers_sf].flat();
 
 function score_champion(c: Country): [number, number] {
     if (c.name === champion.name) { // if your nation correctly moves on, you get points
