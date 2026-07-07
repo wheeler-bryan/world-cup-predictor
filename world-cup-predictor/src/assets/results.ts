@@ -358,7 +358,7 @@ function score_golden_boot(gb: string): [number, number] {
     } else if (gb === "Kai Havertz" || gb === "Zinedine Zidane" || gb === "Christian Pulisic" || gb === "Folarin Balogun") {
         return [0, 20];
     } else if (gb === "Jalen Brunson") {
-        return [0, 10];
+        return [10, 10];
     } else if (golden_boot === "Bryan Wheeler") { // placeholder
         return [0, 0];
     } else {
