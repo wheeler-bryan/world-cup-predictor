@@ -72,7 +72,6 @@ export class BracketRow {
     score_bracket(): void {
 
         this.group_stage_points = score_group_stage(this.group_stage, this.round_of_32, this.name, this.point_details);
-        if (this.name === "Bryan") {console.log(this.point_details);}
         this.round_of_32_points = score_round_of_32(this.round_of_16, this.name);
         this.round_of_16_points = score_round_of_16(this.quarterfinals);
         this.quarterfinals_points = score_quarterfinals(this.semifinals);
@@ -304,7 +303,7 @@ export const losers_sf: Country[] = [
     fakeCountry, fakeCountry
 ]
 
-export const eliminated_qf: Country[] = [eliminated_ro32, losers_qf].flat();
+export const eliminated_qf: Country[] = [eliminated_ro16, losers_qf].flat();
 
 function score_semifinals(f: MatchupData): [number, number] {
     const selectedCountries: Country[] = [f.home!, f.away!]
@@ -339,7 +338,7 @@ function score_semifinals(f: MatchupData): [number, number] {
 
 export const champion: Country = fakeCountry;
 export const runner_up: Country = fakeCountry;
-export const eliminated_sf: Country[] = [eliminated_ro32, losers_sf].flat();
+export const eliminated_sf: Country[] = [eliminated_qf, losers_sf].flat();
 
 function score_champion(c: Country): [number, number] {
     if (c.name === champion.name) { // if your nation correctly moves on, you get points
@@ -356,6 +355,8 @@ const golden_boot: string = "Bryan Wheeler";
 function score_golden_boot(gb: string): [number, number] {
     if (gb === golden_boot) { // if your nation correctly moves on, you get points
         return [20, 0];
+    } else if (gb === "Kai Havertz" || gb === "Zinedine Zidane") {
+        return [0, 20];
     } else if (golden_boot === "Bryan Wheeler") { // placeholder
         return [0, 0];
     } else {
