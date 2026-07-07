@@ -353,7 +353,7 @@ function score_champion(c: Country): [number, number] {
 const golden_boot: string = "Bryan Wheeler";
 
 function score_golden_boot(gb: string): [number, number] {
-    if (gb === golden_boot || gb === "Donald Trump") { // if your nation correctly moves on, you get points
+    if (gb === golden_boot) { // if your nation correctly moves on, you get points
         return [20, 0];
     } else if (gb === "Kai Havertz" || gb === "Zinedine Zidane" || gb === "Christian Pulisic" || gb === "Folarin Balogun") {
         return [0, 20];
