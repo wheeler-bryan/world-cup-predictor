@@ -257,10 +257,10 @@ function score_round_of_16(qf: MatchupData[]): [number, number] {
 }
 
 export const winners_qf: Country[] = [
-    groupI[0], groupH[0], fakeCountry, fakeCountry
+    groupI[0], groupH[0], groupL[0], fakeCountry
 ]
 export const losers_qf: Country[] = [
-    groupC[1], groupG[0], fakeCountry, fakeCountry
+    groupC[1], groupG[0], groupI[2], fakeCountry
 ]
 export const eliminated_ro16: Country[] = [eliminated_ro32, losers_round_of_16].flat();
 
