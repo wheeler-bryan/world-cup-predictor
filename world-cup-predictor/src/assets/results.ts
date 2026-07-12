@@ -354,7 +354,7 @@ const golden_boot: string = "Bryan Wheeler";
 function score_golden_boot(gb: string): [number, number] {
     if (gb === golden_boot) { // if your nation correctly moves on, you get points
         return [20, 0];
-    } else if (gb === "Kai Havertz" || gb === "Zinedine Zidane" || gb === "Christian Pulisic" || gb === "Folarin Balogun") {
+    } else if (gb === "Kai Havertz" || gb === "Zinedine Zidane" || gb === "Christian Pulisic" || gb === "Folarin Balogun" || gb === "Erling Haaland") {
         return [0, 20];
     } else if (gb === "Jalen Brunson") {
         return [10, 10];
