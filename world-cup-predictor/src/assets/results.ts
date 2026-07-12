@@ -120,17 +120,16 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string, d
 
             if (country.name === gs[i][j].name) { // if nation in correct spot, add 4 points!
                 total_points += 4;
-                if (name === "Bryan") {console.log(`${country.name} +4`)}
+                if (name === "Wubz") {console.log(`${country.name} +4`)}
                 details.set(country.name, 4);
             } else if (country.name === gs[i][Number(!j)].name) { // nation in top 2 but wrong spot
                 total_points += 2;
                 max_point_deduction += 2;
                 details.set(country.name, 2);
-                if (name === "Bryan") {console.log(`${country.name} +2, -2, right nation wrong spot`)}
+                if (name === "Wubz") {console.log(`${country.name} +2, -2, right nation wrong spot`)}
             } else if (third_place_countries.some(c => c.name === country.name)) { // projected third place nation advancing in top 2
                 total_points += 2;
-                max_point_deduction += 2
-                if (name === "Bryan") {console.log(`${country.name} +2, -2, proj. third place nation finished top 2`)}
+                if (name === "Wubz") {console.log(`${country.name} +2, -2, proj. third place nation finished top 2`)}
                 details.set(country.name, 2);
             } else { // eliminated nation advancing
                 details.set(country.name, 0);
@@ -144,11 +143,11 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string, d
         if (gs.map(c => [c[0], c[1]]).flat().some(c => c.name === country.name)) { // nation predicted to finish top two finished third, but advance
             total_points += 2;
             max_point_deduction += 2;
-            if (name === "Bryan") {console.log(`${country.name} +2, -2, predicted top two was third`)}
+            if (name === "Wubz") {console.log(`${country.name} +2, -2, predicted top two was third`)}
             details.set(country.name, 2);
         } else if (third_place_countries.some(c => c.name === country.name)) { //nation correctly predicted as third place
             total_points += 2;
-            if (name === "Bryan") {console.log(`${country.name} +2, right third place`)}
+            if (name === "Wubz") {console.log(`${country.name} +2, right third place`)}
             details.set(country.name, 3);
         } else { // eliminated nation advancing as a third place team
             details.set(country.name, 0);
@@ -159,11 +158,11 @@ function score_group_stage(gs: Country[][], ro32: MatchupData[], name: string, d
         if (country.name == "placeholder") continue;
         if (gs.map(c => [c[0], c[1]]).flat().some(c => c.name === country.name)) { // nation predicted to finish top two was eliminated
             max_point_deduction += 4;
-            if (name === "Bryan") {console.log(`${country.name} -4 eliminated top 2`)}
+            if (name === "Wubz") {console.log(`${country.name} -4 eliminated top 2`)}
             details.set(country.name, -4);
         } else if (third_place_countries.some(c => c.name === country.name)) { //nation predicted to advance as a third place team was eliminated
             max_point_deduction += 2;
-            if (name === "Bryan") {console.log(`${country.name} -2 eliminated third`)}
+            if (name === "Wubz") {console.log(`${country.name} -2 eliminated third`)}
             details.set(country.name, -2);
         } else {
             details.set(country.name, 0);
