@@ -295,11 +295,11 @@ function score_quarterfinals(sf: MatchupData[]): [number, number] {
 }
 
 export const winners_sf: Country[] = [
-    fakeCountry, fakeCountry
+    groupH[0], fakeCountry
 ]
 
 export const losers_sf: Country[] = [
-    fakeCountry, fakeCountry
+    groupI[0], fakeCountry
 ]
 
 export const eliminated_qf: Country[] = [eliminated_ro16, losers_qf].flat();
