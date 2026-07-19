@@ -335,8 +335,8 @@ function score_semifinals(f: MatchupData): [number, number] {
     return([total_score, max_point_deduction]);
 }
 
-export const champion: Country = fakeCountry;
-export const runner_up: Country = fakeCountry;
+export const champion: Country = groupH[0];
+export const runner_up: Country = groupJ[0];
 export const eliminated_sf: Country[] = [eliminated_qf, losers_sf].flat();
 
 function score_champion(c: Country): [number, number] {
@@ -349,14 +349,14 @@ function score_champion(c: Country): [number, number] {
     }
 }
 
-const golden_boot: string = "Bryan Wheeler";
+const golden_boot: string = "Kylian Mbappe";
 
 function score_golden_boot(gb: string): [number, number] {
     if (gb === golden_boot) { // if your nation correctly moves on, you get points
         return [20, 0];
     } else if (gb === "Kai Havertz" || gb === "Zinedine Zidane" || gb === "Christian Pulisic" || gb === "Folarin Balogun" || gb === "Erling Haaland") {
         return [0, 20];
-    } else if (gb === "Jalen Brunson") {
+    } else if (gb === "Jalen Brunson" || gb === "Donald Trump") {
         return [10, 10];
     } else if (golden_boot === "Bryan Wheeler") { // placeholder
         return [0, 0];
