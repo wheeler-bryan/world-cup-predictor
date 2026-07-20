@@ -14,7 +14,7 @@ const groupI: Country[] = countries[8];
 const groupJ: Country[] = countries[9];
 const groupK: Country[] = countries[10];
 const groupL: Country[] = countries[11];
-const fakeCountry: Country = new Country("placeholder", "B3D", "Peter");
+// const fakeCountry: Country = new Country("placeholder", "B3D", "Peter");
 
 export class BracketRow {
     name: string;
